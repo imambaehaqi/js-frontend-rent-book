@@ -1,5 +1,3 @@
-import { statement } from "@babel/template";
-
 const initState = {
     booksList:[],
     publishList:[],
@@ -96,20 +94,20 @@ const books = (state = initState, action) => {
                     return books.bookid != action.payload.data.data.bookid
                 })
             }
-        case 'GET_BOOK_PUBLISH_PENDING':
+        case 'GET_BOOKS_PUBLISH_PENDING':
             return{
                 ...state,
                 isLoading:true,
                 isRejected:false,
-                isFullfilled:false,
+                isFullfilled:false
             }
-        case 'GET_BOOK_PUBLISH_REJECTED':
+        case 'GET_BOOKS_PUBLISH_REJECTED':
             return{
                 ...state,
                 isLoading:false,
                 isRejected:true,
             }
-        case 'GET_BOOK_PUBLISH_FULLFILLED':
+        case 'GET_BOOKS_PUBLISH_FULLFILLED':
             return{
                 ...state,
                 isLoading:false,

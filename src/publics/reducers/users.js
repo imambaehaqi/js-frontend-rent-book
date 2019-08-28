@@ -1,5 +1,5 @@
 const initState = {
-    userProfile:{},
+    usersProfile:{},
     isLoading:false,
     isRejected:false,
     isFullfilled:false
@@ -64,7 +64,7 @@ const users = (state = initState, action) => {
                 ...state,
                 isLoading:false,
                 isFullfilled:true,
-                userProfile: action.payload.data.data
+                usersProfile: action.payload.data.data
             }
         default:
             return state

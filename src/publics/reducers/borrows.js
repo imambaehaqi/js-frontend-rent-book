@@ -1,8 +1,5 @@
-import { stat } from "fs";
-import { fas } from "@fortawesome/free-solid-svg-icons";
-
 const initState = {
-    borrowingData:{},
+    borrowsData:{},
     isLoading:false,
     isRejected:false,
     isFullfilled:false
@@ -10,65 +7,65 @@ const initState = {
 
 const borrows = (state = initState, action) => {
     switch(action.type){
-        case 'BORROW_BOOK_PENDING':
+        case 'BORROWS_BOOKS_PENDING':
             return{
                 ...state,
                 isLoading:true,
                 isRejected:false,
                 isFullfilled:false
             }
-        case 'BORROW_BOOK_REJECTED':
+        case 'BORROWS_BOOKS_REJECTED':
             return{
                 ...state,
                 isLoading:false,
                 isRejected:true
             }
-        case 'BORROW_BOOK_FULLFILLED':
+        case 'BORROWS_BOOKS_FULLFILLED':
             return{
                 ...state,
                 isLoading:false,
                 isFullfilled:true,
-                borrowingData: action.payload.data.data
+                borrowsData: action.payload.data.data
             }
-        case 'RETURN_BOOK_PENDING':
+        case 'RETURN_BOOKS_PENDING':
             return{
                 ...state,
                 isLoading:true,
                 isRejected:false,
                 isFullfilled:false
             }
-        case 'RETURN_BOOK_REJECTED':
+        case 'RETURN_BOOKS_REJECTED':
             return{
                 ...state,
                 isLoading:false,
                 isRejected:true
             }
-        case 'RETURN_BOOK_FULLFILLED':
+        case 'RETURN_BOOKS_FULLFILLED':
             return{
                 ...state,
                 isLoading:false,
                 isFullfilled:true,
-                borrowingData: action.payload.data.data
+                borrowsData: action.payload.data.data
             }
-        case 'GET_LATEST_BOOK_BORROW_PENDING':
+        case 'GET_LATEST_BOOKS_BORROW_PENDING':
             return{
                 ...state,
                 isLoading:true,
                 isRejected:false,
                 isFullfilled:false
             }
-        case 'GET_LATEST_BOOK_BORROW_REJECTED':
+        case 'GET_LATEST_BOOKS_BORROW_REJECTED':
             return{
                 ...state,
                 isLoading:false,
                 isRejected:true
             }
-        case 'GET_LATEST_BOOK_BORROW_FULLFILLED':
+        case 'GET_LATEST_BOOKS_BORROW_FULLFILLED':
             return{
                 ...state,
                 isLoading:false,
                 isFullfilled:true,
-                borrowingData: action.payload.data.data
+                borrowsData: action.payload.data.data
             }
         default:
             return state

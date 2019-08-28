@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Route } from 'react-router-dom'
+import {connect} from 'react-redux'
 
 import Navbar from '../components/navBar'
 import CarouselBooks from '../components/carouselBooks'
@@ -21,4 +23,9 @@ export class home extends Component {
   }
 }
 
-export default home
+const mapStateToProps = (state) => {
+  return{
+    user: state.user,
+  }
+}
+export default connect(mapStateToProps)(home)

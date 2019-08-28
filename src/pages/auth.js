@@ -1,19 +1,21 @@
 import React, { Component } from 'react'
-import { Route, Redirect } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 
 import FormLogin from '../components/formLogin'
 import FormRegister from '../components/formRegister'
 
 class auth extends Component {
-  constructor (props) {
+  constructor(props){
     super(props)
     this.state = {
       loggedIn: this.isLoggedIn()
     }
+    if(this.isLoggedIn())
+      props.history.push('/')
   }
 
-  isLoggedIn () {
-    return document.cookie.includes('token=Bearer')
+  isLoggedIn(){
+    return window.localStorage.getItem('token')
   }
 
   render () {
@@ -37,7 +39,7 @@ class auth extends Component {
             path={'/login'}
             render={() => {
               return (
-                this.state.loggedIn ? <Redirect to='./' />
+                this.state.loggedIn ? this.props.history.push('/')
                   : <div>
                     <FormLogin />
                   </div>
@@ -48,8 +50,7 @@ class auth extends Component {
             path={'/register'}
             render={() => {
               return (
-                this.state.loggedIn ? <Redirect to='./' />
-                  : <div>
+                  <div>
                     <FormRegister />
                   </div>
               )

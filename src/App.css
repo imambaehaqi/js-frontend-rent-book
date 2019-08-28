@@ -11,12 +11,10 @@
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgb(199, 186, 186);
 }
 
 .App-link {
@@ -30,4 +28,183 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.app{
+  position: relative;
+  display: flex;
+}
+
+.main{
+  flex-basis: 50%;
+  background: url(libpict.svg);
+  background-size: 100%;
+}
+
+.container form{
+  padding-top: 4vh;
+  padding-left: 5vh;
+  padding-bottom: 5vh;
+}
+
+.container ul{
+  margin-left: 10vh;
+  justify-content: space-between;
+}
+
+.container form input{
+  width: 60%;
+}
+
+.text-margin{
+  margin-left: 13px;
+  color: whitesmoke;
+}
+
+.text-margin h1{
+  padding-top: 280px;
+  font-size: 48px
+}
+
+.text-margin h3{
+  font-size: 14px;
+  padding-top: 214px;
+}
+
+.right-form{
+  position: relative;
+  background-color: white;
+}
+
+.right-form img{
+  margin-left: 550px;
+}
+
+.right-form div{
+  margin-left: 50px;
+}
+
+.right-form h6{
+  padding-top: 15vh;
+  margin-left: 55px;
+  text-align: justify;
+}
+
+.box-shadow{
+  box-shadow: 5px 5px 15px black;
+}
+
+.dashboard{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  margin-bottom: 20px;
+  margin-top: 100px;
+}
+
+.bg-header{
+  width: 100%;
+  height: 270px;
+}
+
+.bocil{
+  margin-top: -100px;
+  width: 350%;
+  border-radius:10px;
+  box-shadow: 10px 10px 16px -7px rgba(0,0,0,0.54);
+  margin-bottom:40px;
+  margin-bottom: 50px;
+}
+
+.card{
+  align-content: flex-start;
+  border-radius: 15px 15px 15px 15px;
+  box-shadow: 10px 10px 16px -7px rgba(0,0,0,0.54);
+  width: 20rem;
+  margin-bottom:40px;
+}
+
+.card img{
+  border-radius: 15px 15px 0px 0px;
+  height: 14rem;
+  width: 20rem;
+}
+
+.carousel-inner img {
+  display: flex;
+  margin: auto;
+  border-radius: 15px 15px 15px 15px;
+}
+
+.carousel-control-next-icon{
+  border-radius: 150px 150px 150px;
+  padding: 20px;
+  background-color: gray;
+  background-size: 30px;
+}
+
+.carousel-control-prev-icon{
+  border-radius: 150px 150px 150px;
+  padding: 20px;
+  background-color: gray;
+  background-size: 30px;
+}
+
+.jumbotron {
+  width:100%;
+  height:300px;
+  position:relative;
+  background-repeat: no-repeat;
+  background-size:100%
+}
+
+.litleBook{
+  position:absolute;
+  right:50px;
+  bottom:-100px;
+  width:200px;
+  height:250px;
+  background-color: brown;
+  border-radius: 10px;
+  background-size: 100% 100%;
+  box-shadow: 10px 10px 16px -7px rgba(0,0,0,0.74);
+  background-position: 'center'
+  
+}
+
+.btn-back {
+  width:30px;
+  height:30px;
+  background-color:white;
+  border-radius: 50%;
+  position: absolute;
+  top:20px;
+  left:20px
+}
+
+.btn-edit {
+  position:absolute;
+  top:3%;
+  right:8%;
+  color: #fff;
+  font-weight:bold
+}
+
+.btn-delete {
+  position: absolute;
+  top:5%;
+  right:4%;
+  color:#fff;
+  font-weight:bold;
+}
+
+.close {
+  color:red;
+}
+
+.close:hover {
+  color:red;
+  border: 2px solid red;
+  border-radius:50%;
 }

@@ -11,9 +11,9 @@ module.exports = {
             })
         }
     },
-    addGenres: (data) => {
+    addGenre: (data) => {
         return {
-            type: 'ADD_GENRES',
+            type: 'ADD_GENRE',
             payload: Axios.post('http://localhost:1150/genres', data, {
                 headers:{
                     Authorization: window.localStorage.getItem('token')
@@ -21,9 +21,9 @@ module.exports = {
             })
         }
     },
-    deleteGenres: (genreid) => {
+    deleteGenre: (genreid) => {
         return {
-            type: 'DELETE_GENRES',
+            type: 'DELETE_GENRE',
             payload: Axios.delete(`http://localhost:1150/genres/${genreid}`, {
                 headers:{
                     Authorization: window.localStorage.getItem('token')
@@ -31,9 +31,9 @@ module.exports = {
             })
         }
     },
-    editGenres: (genreid, data) => {
+    editGenre: (genreid, data) => {
         return {
-            type: 'EDIT_GENRES',
+            type: 'EDIT_GENRE',
             payload: Axios.patch(`http://localhost:1150/genres/${genreid}`, data, {
                 headers:{
                     Authorization: window.localStorage.getItem('token')

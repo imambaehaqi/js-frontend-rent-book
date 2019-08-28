@@ -19,7 +19,7 @@ module.exports = {
     },
     addBook: (data) => {
         return {
-            type: 'ADD_BOOKS',
+            type: 'ADD_BOOK',
             payload: Axios.post('http://localhost:1150/books', data, {
                 headers:{
                     Authorization: window.localStorage.getItem('token')
@@ -29,7 +29,7 @@ module.exports = {
     },
     deleteBook: (bookid) => {
         return {
-            type: 'DELETE_BOOKS',
+            type: 'DELETE_BOOK',
             payload: Axios.delete(`http://localhost:1150/books/${bookid}`,{
                 headers:{
                     Authorization: window.localStorage.getItem('token')
@@ -39,7 +39,7 @@ module.exports = {
     },
     editBook: (bookid, data) => {
         return{
-            type: 'EDIT_BOOKS',
+            type: 'EDIT_BOOK',
             payload: Axios.patch(`http://localhost:1150/books/${bookid}`, data,{
                 headers:{
                     Authorization: window.localStorage.getItem('token')

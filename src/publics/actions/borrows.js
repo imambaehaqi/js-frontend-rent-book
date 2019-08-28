@@ -1,9 +1,9 @@
 import Axios from 'axios'
 
 module.exports = {
-    borrows: (data) => {
+    borrowBook: (data) => {
         return{
-            type: 'BORROWS_BOOKS',
+            type: 'BORROW_BOOK',
             payload: Axios.post('http://localhost:1150/borrows', data,{
                 headers:{
                     Authorization: window.localStorage.getItem('token')
@@ -13,7 +13,7 @@ module.exports = {
     },
     returnBook: (data) => {
         return{
-            type: 'RETURN_BOOKS',
+            type: 'RETURN_BOOK',
             payload: Axios.patch('http://localhost:1150/borrows', data,{
                 headers:{
                     Authorization: window.localStorage.getItem('token')
@@ -21,9 +21,9 @@ module.exports = {
             })
         }
     },
-    getLatestBorrowsByBookId: (borrowid) => {
+    getLatestBorrowBook: (borrowid) => {
         return{
-            type: 'GET_LATEST_BOOKS_BORROWS',
+            type: 'GET_LATEST_BOOK_BORROW',
             payload: Axios.get(`http://localhost:1150/borrows/book/${borrowid}`,{
                 headers:{
                     Authorization: window.localStorage.getItem('token')

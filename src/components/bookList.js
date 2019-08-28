@@ -1,24 +1,25 @@
-import React from 'react';
-import Axios from 'axios';
-import BookCard from './bookCard';
-import { Alert } from 'react-bootstrap';
+import React from 'react'
+import Axios from 'axios'
+import BookCard from './bookCard'
+import { Alert } from 'react-bootstrap'
 
-class BooksList extends React.Component{
-  constructor(props){
+class BooksList extends React.Component {
+  constructor (props) {
     super(props)
 
     this.state = {
-      dataSource: props.dataSource || "http://localhost:1150/books",
-      data: [],
+      dataSource: props.dataSource || 'http://localhost:1150/books',
+      data: []
     }
   }
-  componentDidMount(){
-    Axios.get(`${this.state.dataSource}`,{
-      headers:{
-        Authorization : document.cookie.split("=")[1],
+
+  componentDidMount () {
+    Axios.get(`${this.state.dataSource}`, {
+      headers: {
+        Authorization: document.cookie.split('=')[1]
       }
     })
-      .then((result) =>{
+      .then((result) => {
         this.setState({
           data: result.data.data
         })
@@ -26,23 +27,23 @@ class BooksList extends React.Component{
       .catch(err => console.log(err))
   }
 
-  render(){
-    const {data} = this.state
-    return(
-      <div style={{display: 'flex', flexWrap:"wrap", flexDirection: 'row'}} className="justify-content-between">
+  render () {
+    const { data } = this.state
+    return (
+      <div style={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'row' }} className='justify-content-between'>
         {
-          data !==null? data.map((book, index) => {
-            return(
-                <BookCard  
+          data !== null ? data.map((book, index) => {
+            return (
+              <BookCard
                 onClick={() => this.getDetails(index)}
                 key={index}
-                imgUrl={book.image} 
+                imgUrl={book.image}
                 bookId={book.id}
                 title={book.title}
-                description={book.description.substr(0,75)+'...'} />
-              )
-            }
-          ):<Alert variant='danger'>Book Not Found</Alert>
+                description={book.description.substr(0, 75) + '...'} />
+            )
+          }
+          ) : <Alert variant='danger'>Book Not Found</Alert>
         }
       </div>
     )

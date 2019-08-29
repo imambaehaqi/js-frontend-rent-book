@@ -1,5 +1,7 @@
 const initState = {
     genreList:[],
+    errMessage:'',
+    message:'',
     isLoading:false,
     isRejected:false,
     isFullfilled:false
@@ -18,7 +20,8 @@ const genres = (state = initState, action) => {
             return{
                 ...state,
                 isLoading:false,
-                isRejected:true
+                isRejected:true,
+                errMessage:action.payload.response.data.message
             }
         case 'GET_GENRES_FULLFILLED':
             return{
@@ -38,7 +41,8 @@ const genres = (state = initState, action) => {
             return{
                 ...state,
                 isLoading:false,
-                isRejected:true
+                isRejected:true,
+                errMessage:action.payload.response.data.message
             }
         case 'ADD_GENRES_FULLFILLED':
             return{
@@ -67,7 +71,7 @@ const genres = (state = initState, action) => {
                 isLoading:false,
                 isFullfilled:true,
                 genreList: state.genreList.map((genres) => {
-                    return genres.genreid == newGenreData.genreid ? newGenreData : genres
+                    return genres.genreid === newGenreData.genreid ? newGenreData : genres
                 })
             }
         case 'DELETE_GENRES_PENDING':
@@ -89,7 +93,7 @@ const genres = (state = initState, action) => {
                 isLoading:false,
                 isFullfilled:true,
                 genreList: state.genreList.filter((genres) => {
-                    return genres.genreid != action.payload.data.data.genreid
+                    return genres.genreid !== action.payload.data.data.genreid
                 })
             }
         default:

@@ -19,6 +19,8 @@ class formRegister extends Component {
         password: ''
       }
     }
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleClose = () => {
@@ -33,7 +35,7 @@ class formRegister extends Component {
     newFormData[name] = value
     this.setState({
       formData: newFormData
-    })
+    },()=>{console.log(this.state.formData)})
   }
 
   handleSubmit = (event) => {
@@ -62,8 +64,8 @@ class formRegister extends Component {
           <h1>Register</h1>
           <a>Welcome Back, Please Register<br />to create account</a>
         </div>
-        <div style={this.state.style} onSubmit={this.handleSubmit}>
-          <Form className='shadow col-lg-7'
+        <div >
+          <Form className='shadow col-lg-7' style={this.state.style} onSubmit={this.handleSubmit}
             style={{ paddingTop: '8px', paddingBottom: '5px', marginBottom: '10px', marginTop: '10px' }}>
             <Form.Group controlId='formBasicUsername' style={{ marginLeft: '10px' }}>
               <Form.Text className='text-muted'>Username:</Form.Text>
@@ -81,9 +83,9 @@ class formRegister extends Component {
               <Form.Text className='text-muted'>Password:</Form.Text>
               <Form.Control name='password' type='password' onChange={this.handleChange} placeholder='Enter password' />
             </Form.Group>
+            <Button variant='dark' type='submit' className='btn-black'>SignUp</Button><a>&nbsp;</a>
+            <Link to='./login' className='btn btn-light' >Login</Link>
           </Form>
-          <Button variant='dark' type='submit' className='btn-black'>SignUp</Button><a>&nbsp;</a>
-          <Link to='./login' className='btn btn-light' >Login</Link>
         </div>
         <Modal show={this.state.showModal} onHide={this.handleClose}>
             <Modal.Header>

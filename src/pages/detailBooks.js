@@ -5,8 +5,6 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
 import Background from '../libpict.svg'
 
-import ModalEdit from '../components/modalEditForm'
-
 class detailBooks extends Component {
   // constructor(props){
   //     super(props)

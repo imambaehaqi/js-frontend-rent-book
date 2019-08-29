@@ -10,7 +10,7 @@ class BooksList extends React.Component{
     super(props)
 
     this.state = {
-      dataSource: props.dataSource||"http://localhost:1150/books",
+      dataSource: props.dataSource || "http://localhost:1150/books",
       history: props.history,
       data: null,
       page: 1

@@ -1,5 +1,7 @@
 const initState = {
     usersProfile:{},
+    errMessage:'',
+    message:'',
     isLoading:false,
     isRejected:false,
     isFullfilled:false
@@ -18,7 +20,8 @@ const users = (state = initState, action) => {
             return{
                 ...state,
                 isLoading:false,
-                isRejected:true
+                isRejected:true,
+                errMessage: action.payload.response.data.message
             }
         case 'LOGIN_FULLFILLED':
             return{
@@ -38,7 +41,8 @@ const users = (state = initState, action) => {
             return{
                 ...state,
                 isLoading:false,
-                isRejected:true
+                isRejected:true,
+                errMessage:action.payload.response.data.message
             }
         case 'REGISTER_FULLFILLED':
             return{
@@ -57,7 +61,8 @@ const users = (state = initState, action) => {
             return{
                 ...state,
                 isLoading:false,
-                isRejected:true
+                isRejected:true,
+                errMessage:action.payload.response.data.message
             }
         case 'GET_PROFILE_FULLFILLED':
             return{

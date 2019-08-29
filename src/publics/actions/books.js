@@ -65,7 +65,7 @@ export const getBookPublish = () =>{
 export const getBookPopular = () =>{
     return{
         type: 'GET_POPULAR_BOOKS',
-        payload: Axios.get('http://localhost:1150/books/popular',{
+        payload: Axios.get('http://localhost:1150/books/available',{
             headers:{
                 Authorization: window.localStorage.getItem('token')
             }

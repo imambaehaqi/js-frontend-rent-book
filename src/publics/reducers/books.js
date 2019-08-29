@@ -69,7 +69,7 @@ const books = (state = initState, action) => {
                 isLoading:false,
                 isFullfilled:true,
                 booksList: state.booksList.map((books) => {
-                    return books.bookid == newBookData.bookid ? newBookData : books
+                    return books.bookid === newBookData.bookid ? newBookData : books
                 })
             }
         case 'DELETE_BOOKS_PENDING':
@@ -91,7 +91,7 @@ const books = (state = initState, action) => {
                 isLoading:false,
                 isFullfilled:true,
                 booksList: state.booksList.filter((books) => {
-                    return books.bookid != action.payload.data.data.bookid
+                    return books.bookid !== action.payload.data.data.bookid
                 })
             }
         case 'GET_BOOKS_PUBLISH_PENDING':

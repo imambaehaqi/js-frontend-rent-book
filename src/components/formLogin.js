@@ -62,8 +62,8 @@ class formLogin extends React.Component {
           <h1>Login</h1>
           <a>Welcome Back, Please Login<br />to your account</a>
         </div>
-        <div style={this.state.style} onSubmit={this.handleSubmit}>
-          <Form className='shadow col-lg-7'
+        <div>
+          <Form className='shadow col-lg-7' style={this.state.style} onSubmit={this.handleSubmit}
             style={{ paddingTop: '8px', paddingBottom: '5px', marginBottom: '10px', marginTop: '10px' }}>
             <Form.Group controlId='formBasicEmail' style={{ marginLeft: '10px' }}>
               <Form.Text className='text-muted'>
@@ -79,10 +79,10 @@ class formLogin extends React.Component {
               <Form.Control type='password' placeholder='Password' name="password"
                 onChange={this.handleChange}/>
             </Form.Group>
-          </Form>
-          <Button variant='dark' type='submit'>
+            <Button variant='dark' type='submit'>
                         Login
-          </Button><a>&nbsp;</a>
+            </Button><a>&nbsp;</a>
+          </Form>
           <Link to='./register' className='btn btn-light' >SignUp</Link>
         </div>
       </div>

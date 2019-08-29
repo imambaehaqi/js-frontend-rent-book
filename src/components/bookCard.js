@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Card, Badge } from 'react-bootstrap'
 import { Redirect } from 'react-router-dom'
 
+import {connect} from 'react-redux'
+
 class BookCard extends Component {
   constructor(props){
     super(props)
@@ -11,8 +13,8 @@ class BookCard extends Component {
       title : props.title,
       description : props.description,
       available : props.available,
-      genreid : props.genreid,
-      redirectToDetails:false,
+      genre : props.genre,
+      redirectToDetails:false
     }
     this.redirectToDetails = this.redirectToDetails.bind(this)
   }
@@ -38,7 +40,7 @@ class BookCard extends Component {
         </figure>
         <Card.Body>
           <Card.Title>{this.state.title}</Card.Title>
-          <Badge variant="warning">{this.state.genre}</Badge>
+          <Badge variant="warning">{this.state.genreid}</Badge>
           <Card.Text>
             {description.length > 30 ?  description.substr(0,75)+'...': description}
           </Card.Text>
@@ -48,4 +50,9 @@ class BookCard extends Component {
   }
 }
 
-export default BookCard
+const mapStateToProps = (state) => {
+  return{
+    users: state.users
+  }
+}
+export default connect(mapStateToProps)(BookCard)

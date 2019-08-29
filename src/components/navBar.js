@@ -1,18 +1,22 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 
-import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap'
+import { connect } from 'react-redux'
+
+import { Navbar, Nav, Button } from 'react-bootstrap'
 import DropDownCats from './dropDownCats'
 import DropDownTimes from './dropDownTimes'
 import DropDownSortBy from './dropDownSort'
 import SideBarUser from './sideBar'
 import BooksList from './bookList'
+import SearchBooks from './searchBooks'
+import CarouselBooks from './carouselBooks'
 
 import Sidebar from 'react-sidebar'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
-import { getProfile } from '../publics/actions/users';
+import { getProfile } from '../publics/actions/users'
 
 class NavBar extends React.Component {
   constructor (props) {
@@ -56,59 +60,84 @@ class NavBar extends React.Component {
             <DropDownCats history={this.props.history}/><a>&nbsp;</a>
             <DropDownTimes history={this.props.history}/><a>&nbsp;</a>
             <DropDownSortBy history={this.props.history}/><a>&nbsp;</a>
-            <a style={{ marginLeft: '250px' }}>&nbsp;</a>
-            <FormControl type='text' placeholder='Search' className='mr-sm-2' />
+            <SearchBooks history={this.props.history}/><a></a>
           </Nav>
-          <Navbar.Brand href='http://localhost:3001/home'>
+          <Navbar.Brand onClick={()=>{this.props.history.push("/home")}}>
             <img src={require('../bookshelf.svg')} style={{ width: '50px', height: '50px' }} />
             <b>Book's</b>
           </Navbar.Brand>
         </Navbar>
-        <Route
-          path='/home/explore'
-          exact
-          render={() => {
-            return (
+        <Route 
+          path="/home" 
+          exact={true}
+          render={({history}) => {
+            let params = new URLSearchParams(window.location.search)
+            return(
               <div>
-                <BooksList dataSource={`http://localhost:3030/books${window.location.search}`} />
+                <CarouselBooks history={history}/>
+                <BooksList 
+                  availability={params.get("available")} 
+                  history={history} 
+                  sortby={params.get("sortby")} 
+                  search={params.get("search")} 
+                  dataSource={`http://localhost:1150/books`} 
+                  key={window.location.href + this.state} />
               </div>
-            )
-          }}
+            );
+          }} 
         />
-        <Route
-          path='/home/history'
-          exact
+        <Route 
+          path="/home/explore" 
+          exact={true}
+          render={({history}) => {
+            let params = new URLSearchParams(window.location.search)
+            return(
+              <div>
+                <BooksList history={history} sortby={params.get("sortby")} search={params.get("search")} dataSource={`http://localhost:1150/books`} 
+                  key={window.location.href} />
+              </div>
+            );
+          }} 
+        />
+        <Route 
+          path="/home/history" 
+          exact={true}
           render={() => {
-            if (this.state.userData !== undefined) {
-              return (
+            if(this.state.userData !== undefined )
+              return(
                 <div>
-                  <BooksList dataSource={`http://localhost:3030/borrowings/history/${this.state.userData.id}`} />
+                  <BooksList dataSource={`http://localhost:1150/borrows/history/${this.state.userData.userid}`}/>
                 </div>
-              )
-            } else {
-              return (
+              );
+            else 
+              return(
                 <div>
-                    Loading...
+                  Loading...
                 </div>
-              )
-            }
-          }}
+              );
+          }} 
         />
-        <Route
-          path='/home/genre/:genre'
+        <Route 
+          path="/home/genre/:genre" 
           component={(url) => {
-            return <BooksList dataSource={`http://localhost:3030/books/genre/${url.match.params.genre}`} />
-          }}
+            return <BooksList dataSource={`http://localhost:1150/books/genres/${url.match.params.genre}`}/>;
+          }} 
         />
-        <Route
-          path='/home/year/:year'
+        <Route 
+          path="/home/publish/:publish" 
           component={(url) => {
-            return <BooksList dataSource={`http://localhost:3030/books/year/${url.match.params.year}`} />
-          }}
+            return <BooksList dataSource={`http://localhost:1150/books/publish/${url.match.params.year}`}/>;
+          }} 
         />
       </div>
     )
   }
 }
 
-export default NavBar
+const mapStateToProps = (state) => {
+  return{
+    users: state.users,
+  }
+}
+
+export default connect(mapStateToProps)(NavBar)

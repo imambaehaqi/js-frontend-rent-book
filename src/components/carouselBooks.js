@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 
-import {getPopularBooks} from '../publics/actions/books'
+import {getBookPopular} from '../publics/actions/books'
 
 import { Carousel } from 'react-bootstrap'
 
@@ -19,7 +19,7 @@ class carouselBooks extends Component {
   }
 
   componentDidMount = async () => {
-    await this.props.dispatch(getPopularBooks())
+    await this.props.dispatch(getBookPopular())
     this.setState ({popularBooksList: this.props.books.popularBooksList})
   }
 

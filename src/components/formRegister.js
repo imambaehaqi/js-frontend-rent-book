@@ -19,9 +19,10 @@ class formRegister extends Component {
         password: ''
       }
     }
-    handleClose = () => {
-      this.setState({showModal: false})
-    }
+  }
+
+  handleClose = () => {
+    this.setState({showModal: false})
   }
 
   handleChange (event) {

@@ -18,7 +18,7 @@ function ModalLayer(props) {
                 {props.content}
             </Modal.Body>
         </Modal>
-    );
+    )
 }
 
 function ModalBook(props) {
@@ -26,17 +26,18 @@ function ModalBook(props) {
 
     return (
         <div>
-        <Button variant={props.variant || "light"} size="lg" onClick={() => setModalShow(true)}>
-            {props.title}
-        </Button>
+            <Button variant={props.variant || "light"} size="lg" onClick={() => setModalShow(true)}>
+                {props.title}
+            </Button>
 
-        <ModalLayer
-            show={modalShow}
-            onHide={() => setModalShow(false)}
-            title={props.title}
-            content={props.content}
-        />
+            <ModalLayer
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+                title={props.title}
+                content={props.content}
+            />
         </div>
-  );
+  )
 }
+
 export default ModalBook

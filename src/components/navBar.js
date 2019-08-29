@@ -1,5 +1,4 @@
 import React from 'react'
-import Axios from 'axios'
 import { Route } from 'react-router-dom'
 
 import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap'
@@ -13,12 +12,15 @@ import Sidebar from 'react-sidebar'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { getProfile } from '../publics/actions/users';
 
 class NavBar extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      sidebarOpen: true
+      sidebarOpen: false,
+      search:"",
+      userData:undefined
     }
     this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this)
   }
@@ -27,30 +29,21 @@ class NavBar extends React.Component {
     this.setState({ sidebarOpen: open })
   }
 
-  // componentWillMount(){
-  //   if(!document.cookie.includes('token=Bearer'))
-  //   window.location.replace('http://localhost:3000/')
-
-  //   Axios.get('http://localhost:1150/users/profile', {
-  //       headers:{
-  //           Authorization : document.cookie.split('=')[1],
-  //       }
-  //   })
-  //   .then(res => {
-  //       const userData = res.data.data
-  //       this.setState({
-  //           userData : userData
-  //       })
-  //   })
-  //   .catch(err => console.log(err))
-  // }
+  componentDidMount = async () => {
+    if(window.localStorage.getItem("token") === null)
+      this.props.history.push('/')
+      await this.props.dispatch(getProfile())
+      this.setState({
+        userData: this.props.users.userProfile
+      })
+  }
 
   render () {
     return (
       <div>
         <Sidebar
           sidebar={<SideBarUser
-            username='Imam'
+            history={this.props.history}
           />}
           open={this.state.sidebarOpen}
           onSetOpen={this.onSetSidebarOpen}
@@ -60,9 +53,9 @@ class NavBar extends React.Component {
             <Button variant='light' onClick={() => this.onSetSidebarOpen(true)}>
               <FontAwesomeIcon icon={faBars} />
             </Button><a>&nbsp;</a>
-            <DropDownCats /><a>&nbsp;</a>
-            <DropDownTimes /><a>&nbsp;</a>
-            <DropDownSortBy />
+            <DropDownCats history={this.props.history}/><a>&nbsp;</a>
+            <DropDownTimes history={this.props.history}/><a>&nbsp;</a>
+            <DropDownSortBy history={this.props.history}/><a>&nbsp;</a>
             <a style={{ marginLeft: '250px' }}>&nbsp;</a>
             <FormControl type='text' placeholder='Search' className='mr-sm-2' />
           </Nav>

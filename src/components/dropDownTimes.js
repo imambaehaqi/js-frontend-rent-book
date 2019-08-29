@@ -1,25 +1,30 @@
 import React, { Component } from 'react'
-import Axios from 'axios'
+import {connect} from 'react-redux'
+
 import {Dropdown} from 'react-bootstrap'
 
-export class dropDownCat extends Component {
+import {getBookPublish} from '../publics/actions/books'
+
+class dropDownPublish extends Component {
     constructor(props){
         super(props)
         this.state = {
-            catList: [],
+            publishList: [],
+            history: props.history
         }
     }
 
-    componentDidMount = () => {
-        Axios.get('http://localhost:1150/genres')
-        .then (res => {
-            this.setState ({catList: res.data.data})
-        })
-        .catch (err => console.log ('error = ', err))
+    goToPublishPath = (publish) => {
+        this.state.history.push(`/home/publish/${publish}/`)
+    }
+
+    componentDidMount = async () => {
+        await this.props.dispatch(getBookPublish())
+        this.setState ({publishList: this.props.books.publishList})
     }
 
     render() {
-        const {catList} = this.state
+        const {publishList} = this.state
         return (
             <Dropdown>
                 <Dropdown.Toggle variant="light" id="dropdown-basic">
@@ -27,13 +32,23 @@ export class dropDownCat extends Component {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                    {publishList.length > 0 ?
+                        publishList.map((publish, index) => {
+                        return <Dropdown.Item key = {publish.publish}
+                                onClick={() => {this.goToPublishPath(publish.publish)}}>
+                                {publish.publish}
+                                </Dropdown.Item>}):
+                                <Dropdown.Item key="0" href = "#">Loading ...</Dropdown.Item>}
                 </Dropdown.Menu>
             </Dropdown>
         )
     }
 }
 
-export default dropDownCat
+const mapStateProps = state => {
+    return{
+        books: state.books
+    }
+}
+
+export default connect(mapStateProps)(dropDownPublish)

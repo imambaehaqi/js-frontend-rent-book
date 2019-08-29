@@ -1,21 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Route } from 'react-router-dom'
+import { Navbar, Nav, Button } from 'react-bootstrap'
+import Sidebar from 'react-sidebar'
 
 import CarouselBooks from '../components/carouselBooks'
 import BooksList from '../components/bookList'
-
-import { Navbar, Nav, Button } from 'react-bootstrap'
 import DropDownCats from '../components/dropDownCats'
 import DropDownTimes from '../components/dropDownTimes'
 import DropDownSortBy from '../components/dropDownSort'
 import SideBarUser from '../components/sideBar'
 import {SearchBooks} from '../components/searchBooks'
 
-import Sidebar from 'react-sidebar'
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
+
 import { getProfile } from '../publics/actions/users'
 
 class home extends React.Component {
@@ -59,10 +58,10 @@ class home extends React.Component {
             </Button><a>&nbsp;</a>
             <DropDownCats history={this.props.history}/><a>&nbsp;</a>
             <DropDownTimes history={this.props.history}/><a>&nbsp;</a>
-            <DropDownSortBy history={this.props.history}/><a>&nbsp;</a>
+            {/* <DropDownSortBy history={this.props.history}/><a>&nbsp;</a> */}
             <SearchBooks history={this.props.history}/><a></a>
           </Nav>
-          <Navbar.Brand onClick={()=>{this.props.history.push("/home")}}>
+          <Navbar.Brand href="/">
             <img src={require('../bookshelf.svg')} style={{ width: '50px', height: '50px' }} />
             <b>Book's</b>
           </Navbar.Brand>
@@ -73,10 +72,11 @@ class home extends React.Component {
           render={({history}) => {
             let params = new URLSearchParams(window.location.search)
             return(
-              <div>
-                <CarouselBooks history={history}/>
+              <div className="container">
+                <CarouselBooks history={history}/><hr/>
+                <h1>List Book's</h1><hr/>
                 <BooksList 
-                  availability={params.get("available")} 
+                  available={params.get("available")} 
                   history={history} 
                   sortby={params.get("sortby")} 
                   search={params.get("search")} 
@@ -93,7 +93,12 @@ class home extends React.Component {
             let params = new URLSearchParams(window.location.search)
             return(
               <div>
-                <BooksList history={history} sortby={params.get("sortby")} search={params.get("search")} dataSource={`http://localhost:1150/books`} 
+                <BooksList
+                  available={params.get("available")} 
+                  history={history}
+                  sortby={params.get("sortby")} 
+                  search={params.get("search")} 
+                  dataSource={`http://localhost:1150/books`} 
                   key={window.location.href} />
               </div>
             );
@@ -120,13 +125,13 @@ class home extends React.Component {
         <Route 
           path="/home/genre/:genre" 
           component={(url) => {
-            return <BooksList dataSource={`http://localhost:1150/books/genres/${url.match.params.genre}`}/>;
+            return <BooksList dataSource={`http://localhost:1150/books/genres/${url.match.params.genres}`}/>;
           }} 
         />
         <Route 
           path="/home/publish/:publish" 
           component={(url) => {
-            return <BooksList dataSource={`http://localhost:1150/books/publish/${url.match.params.year}`}/>;
+            return <BooksList dataSource={`http://localhost:1150/books/year/${url.match.params.publish}`}/>;
           }} 
         />
       </div>

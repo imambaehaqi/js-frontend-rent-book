@@ -40,6 +40,7 @@ class formLogin extends React.Component {
   this.props.dispatch(login(data))
     .then (res => {
       window.localStorage.setItem("token", res.action.payload.data.token)
+      console.log(window.localStorage.getItem('token'))
       this.setState({
         loggedIn:true
       })

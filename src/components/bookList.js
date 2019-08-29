@@ -54,7 +54,7 @@ class BooksList extends React.Component{
                   )
                 })
                 :
-                <Alert variant='danger'>Book Not Found</Alert>
+                <Alert variant=''></Alert>
             }
           </div>
           <Button className="btn btn-warning" 

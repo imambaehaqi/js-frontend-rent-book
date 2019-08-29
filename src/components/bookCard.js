@@ -33,7 +33,7 @@ class BookCard extends Component {
         >
         <figure>
           <Card.Img variant='top' src={this.state.image} />
-            {this.state.availability === 1 ? 
+            {this.state.available === 1 ? 
             <Badge variant="warning" className="availability-badge">Available</Badge>
             : 
             <Badge variant="danger" className="availability-badge">Unavailable</Badge>}

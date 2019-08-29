@@ -9,7 +9,7 @@ class dropDownCat extends Component {
     constructor(props){
         super(props)
         this.state = {
-            catList: [],
+            genreList: [],
             history: props.history
         }
     }
@@ -20,19 +20,19 @@ class dropDownCat extends Component {
 
     componentDidMount = async () => {
         await this.props.dispatch(getGenres())
-        this.setState ({catList: this.props.genre.catList})
+        this.setState ({genreList: this.props.genres.genreList})
     }
 
     render() {
-        const {catList} = this.state
+        const {genreList} = this.state
         return (
             <Dropdown>
                 <Dropdown.Toggle variant="light" id="dropdown-basic">
                     All Categories
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                    {catList.length > 0 ?
-                    catList.map((genre) => {
+                    {genreList.length > 0 ?
+                    genreList.map((genre) => {
                     return <Dropdown.Item key = {genre.name}
                             onClick={() => {this.goToGenrePath(genre.name)}}>
                             {genre.name}

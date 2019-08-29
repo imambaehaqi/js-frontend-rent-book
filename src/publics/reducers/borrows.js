@@ -1,8 +1,10 @@
 const initState = {
     borrowsData:{},
+    errMessage:'',
+    message:'',
     isLoading:false,
     isRejected:false,
-    isFullfilled:false
+    isFulfilled:false
 }
 
 const borrows = (state = initState, action) => {
@@ -12,19 +14,20 @@ const borrows = (state = initState, action) => {
                 ...state,
                 isLoading:true,
                 isRejected:false,
-                isFullfilled:false
+                isFulfilled:false
             }
         case 'BORROWS_BOOKS_REJECTED':
             return{
                 ...state,
                 isLoading:false,
-                isRejected:true
+                isRejected:true,
+                errMessage:action.payload.response.data.message
             }
-        case 'BORROWS_BOOKS_FULLFILLED':
+        case 'BORROWS_BOOKS_FULFILLED':
             return{
                 ...state,
                 isLoading:false,
-                isFullfilled:true,
+                isFulfilled:true,
                 borrowsData: action.payload.data.data
             }
         case 'RETURN_BOOKS_PENDING':
@@ -32,19 +35,20 @@ const borrows = (state = initState, action) => {
                 ...state,
                 isLoading:true,
                 isRejected:false,
-                isFullfilled:false
+                isFulfilled:false
             }
         case 'RETURN_BOOKS_REJECTED':
             return{
                 ...state,
                 isLoading:false,
-                isRejected:true
+                isRejected:true,
+                errMessage:action.payload.response.data.message
             }
-        case 'RETURN_BOOKS_FULLFILLED':
+        case 'RETURN_BOOKS_FULFILLED':
             return{
                 ...state,
                 isLoading:false,
-                isFullfilled:true,
+                isFulfilled:true,
                 borrowsData: action.payload.data.data
             }
         case 'GET_LATEST_BOOKS_BORROW_PENDING':
@@ -52,19 +56,20 @@ const borrows = (state = initState, action) => {
                 ...state,
                 isLoading:true,
                 isRejected:false,
-                isFullfilled:false
+                isFulfilled:false
             }
         case 'GET_LATEST_BOOKS_BORROW_REJECTED':
             return{
                 ...state,
                 isLoading:false,
-                isRejected:true
+                isRejected:true,
+                errMessage:action.payload.response.data.message
             }
-        case 'GET_LATEST_BOOKS_BORROW_FULLFILLED':
+        case 'GET_LATEST_BOOKS_BORROW_FULFILLED':
             return{
                 ...state,
                 isLoading:false,
-                isFullfilled:true,
+                isFulfilled:true,
                 borrowsData: action.payload.data.data
             }
         default:

@@ -1,5 +1,7 @@
 import Axios from 'axios'
 
+const token = window.localStorage.getItem("token")
+
 
 export const getBooks = (dataSource, page = 1, sortby, search) => {
     let url = `${dataSource}?page=${page}`
@@ -12,7 +14,18 @@ export const getBooks = (dataSource, page = 1, sortby, search) => {
         type: 'GET_BOOKS',
         payload: Axios.get(url, {
             headers:{
-                Authorization: window.localStorage.getItem('token')
+                Authorization: token
+            }
+        })
+    }
+}
+
+export const getBookById = (bookid) => {
+    return {
+        type: 'GET_BOOK_BY_ID',
+        payload: Axios.get(`http://localhost:1150/books/${bookid}`,{
+            headers:{
+                Authorization: token
             }
         })
     }
@@ -23,7 +36,7 @@ export const addBook = (data) => {
         type: 'ADD_BOOK',
         payload: Axios.post('http://localhost:1150/books', data, {
             headers:{
-                Authorization: window.localStorage.getItem('token')
+                Authorization: token
             }
         })
     }
@@ -34,7 +47,7 @@ export const deleteBook = (bookid) => {
         type: 'DELETE_BOOK',
         payload: Axios.delete(`http://localhost:1150/books/${bookid}`,{
             headers:{
-                Authorization: window.localStorage.getItem('token')
+                Authorization: token
             }
         })
     }
@@ -45,7 +58,7 @@ export const editBook = (bookid, data) => {
         type: 'EDIT_BOOK',
         payload: Axios.patch(`http://localhost:1150/books/${bookid}`, data,{
             headers:{
-                Authorization: window.localStorage.getItem('token')
+                Authorization: token
             }
         })
     }
@@ -56,7 +69,7 @@ export const getBookPublish = () =>{
         type: 'GET_BOOKS_PUBLISH',
         payload: Axios.get('http://localhost:1150/books/publish/',{
             headers:{
-                Authorization: window.localStorage.getItem('token')
+                Authorization: token
             }
         })
     }
@@ -67,7 +80,7 @@ export const getBookPopular = () =>{
         type: 'GET_POPULAR_BOOKS',
         payload: Axios.get('http://localhost:1150/books/available',{
             headers:{
-                Authorization: window.localStorage.getItem('token')
+                Authorization: token
             }
         })
     }

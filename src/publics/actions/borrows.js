@@ -5,7 +5,7 @@ export const borrowBook = (data) => {
         type: 'BORROW_BOOK',
         payload: Axios.post('http://localhost:1150/borrows', data,{
             headers:{
-                Authorization: window.localStorage.getItem('token')
+                Authorization: window.localStorage.getItem("token")
             }
         })
     }
@@ -16,7 +16,7 @@ export const returnBook = (data) => {
         type: 'RETURN_BOOK',
         payload: Axios.patch('http://localhost:1150/borrows', data,{
             headers:{
-                Authorization: window.localStorage.getItem('token')
+                Authorization: window.localStorage.getItem("token")
             }
         })
     }
@@ -27,7 +27,7 @@ export const getLatestBorrowBook = (borrowid) => {
         type: 'GET_LATEST_BOOK_BORROW',
         payload: Axios.get(`http://localhost:1150/borrows/book/${borrowid}`,{
             headers:{
-                Authorization: window.localStorage.getItem('token')
+                Authorization: window.localStorage.getItem("token")
             }
         })
     }

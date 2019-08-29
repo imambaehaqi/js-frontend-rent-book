@@ -4,7 +4,7 @@ const initState = {
     message:'',
     isLoading:false,
     isRejected:false,
-    isFullfilled:false
+    isFulfilled:false
 }
 
 const users = (state = initState, action) => {
@@ -14,7 +14,7 @@ const users = (state = initState, action) => {
                 ...state,
                 isLoading:true,
                 isRejected:false,
-                isFullfilled:false
+                isFulfilled:false
             }
         case 'LOGIN_REJECTED':
             return{
@@ -23,11 +23,11 @@ const users = (state = initState, action) => {
                 isRejected:true,
                 errMessage: action.payload.response.data.message
             }
-        case 'LOGIN_FULLFILLED':
+        case 'LOGIN_FULFILLED':
             return{
                 ...state,
                 isLoading:false,
-                isFullfilled:true,
+                isFulfilled:true,
                 token: action.payload.data.token
             }
         case 'REGISTER_PENDING':
@@ -35,7 +35,7 @@ const users = (state = initState, action) => {
                 ...state,
                 isLoading:true,
                 isRejected:false,
-                isFullfilled:false
+                isFulfilled:false
             }
         case 'REGISTER_REJECTED':
             return{
@@ -44,18 +44,18 @@ const users = (state = initState, action) => {
                 isRejected:true,
                 errMessage:action.payload.response.data.message
             }
-        case 'REGISTER_FULLFILLED':
+        case 'REGISTER_FULFILLED':
             return{
                 ...state,
                 isLoading:false,
-                isFullfilled:true
+                isFulfilled:true
             }
         case 'GET_PROFILE_PENDING':
             return{
                 ...state,
                 isLoading:true,
                 isRejected:false,
-                isFullfilled:false
+                isFulfilled:false
             }
         case 'GET_PROFILE_REJECTED':
             return{
@@ -64,11 +64,11 @@ const users = (state = initState, action) => {
                 isRejected:true,
                 errMessage:action.payload.response.data.message
             }
-        case 'GET_PROFILE_FULLFILLED':
+        case 'GET_PROFILE_FULFILLED':
             return{
                 ...state,
                 isLoading:false,
-                isFullfilled:true,
+                isFulfilled:true,
                 usersProfile: action.payload.data.data
             }
         default:

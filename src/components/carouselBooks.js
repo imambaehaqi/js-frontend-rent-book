@@ -36,7 +36,7 @@ class carouselBooks extends Component {
                 alt={books.title}
               />
             <Carousel.Caption bsPrefix="carousel-caption">
-              <h3>{books.title}</h3>
+              <h4>{books.title}</h4>
             </Carousel.Caption>
           </Carousel.Item>
           )

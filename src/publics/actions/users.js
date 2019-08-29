@@ -18,7 +18,7 @@ export const getProfile = () => {
         type: 'GET_PROFILE',
         payload: Axios.get('http://localhost:1150/users/profile', {
             headers:{
-                Authorization: window.localStorage.getItem('token')
+                Authorization: window.localStorage.getItem("token")
             }
         })
     }

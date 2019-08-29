@@ -2,9 +2,11 @@ const initState = {
     booksList:[],
     publishList:[],
     popularBooksList:[],
+    errMessage:'',
+    message:'',
     isLoading: false,
     isRejected: false,
-    isFullfilled: false
+    isFulfilled: false
 }
 
 const books = (state = initState, action) => {
@@ -14,60 +16,84 @@ const books = (state = initState, action) => {
                 ...state,
                 isLoading:true,
                 isRejected:false,
-                isFullfilled:false
+                isFulfilled:false
             }
         case 'GET_BOOKS_REJECTED':
             return{
                 ...state,
                 isLoading:false,
-                isRejected:true
+                isRejected:true,
+                errMessage: action.payload.response.data.message
             }
-        case 'GET_BOOKS_FULLFILLED':
+        case 'GET_BOOKS_FULFILLED':
             return{
                 ...state,
                 isLoading: false,
-                isFullfilled: true,
+                isFulfilled: true,
                 booksList: action.payload.data.data
+            }
+        case 'GET_BOOK_BY_ID_PENDING':
+            return{
+                ...state,
+                isLoading:true,
+                isRejected:false,
+                isFulfilled:false
+            }
+        case 'GET_BOOK_BY_ID_REJECTED':
+            return{
+                ...state,
+                isLoading:false,
+                isRejected:true,
+                errMessage: action.payload.response.data.message
+            }
+        case 'GET_BOOK_BY_ID_FULFILLED':
+            state.booksList.push(action.payload.data.data[0])
+            return{
+                ...state,
+                isLoading:false,
+                isFulfilled:true
             }
         case 'ADD_BOOKS_PENDING':
             return{
                 ...state,
                 isLoading:true,
                 isRejected:false,
-                isFullfilled:false
+                isFulfilled:false
             }
         case 'ADD_BOOKS_REJECTED':
             return{
                 ...state,
                 isLoading:false,
-                isRejected: true
+                isRejected:true,
+                errMessage:action.payload.response.data.message 
             }
-        case 'ADD_BOOKS_FULLFILLED':
+        case 'ADD_BOOKS_FULFILLED':
+            state.booksList.unshift(action.payload.data.data)
             return{
                 ...state,
                 isLoading:false,
-                isFullfilled:true,
-                booksList: state.booksList.push(action.payload.data.data)
+                isFulfilled:true
             }
         case 'EDIT_BOOKS_PENDING':
             return{
                 ...state,
                 isLoading:true,
                 isRejected:false,
-                isFullfilled:false
+                isFulfilled:false
             }
         case 'EDIT_BOOKS_REJECTED':
             return{
                 ...state,
                 isLoading:false,
-                isRejected:true
+                isRejected:true,
+                errMessage: action.payload.response.data.message
             }
-        case 'EDIT_BOOKS_FULLFILLED':
-            const newBookData = action.payload.data.data
+        case 'EDIT_BOOKS_FULFILLED':
+            const newBookData = action.payload.data.data[0]
             return{
                 ...state,
                 isLoading:false,
-                isFullfilled:true,
+                isFulfilled:true,
                 booksList: state.booksList.map((books) => {
                     return books.bookid === newBookData.bookid ? newBookData : books
                 })
@@ -77,19 +103,20 @@ const books = (state = initState, action) => {
                 ...state,
                 isLoading:true,
                 isRejected:false,
-                isFullfilled:false
+                isFulfilled:false
             }
         case 'DELETE_BOOKS_REJECTED':
             return{
                 ...state,
                 isLoading:false,
-                isRejected:true
+                isRejected:true,
+                errMessage:action.payload.response.data.message
             }
-        case 'DELETE_BOOKS_FULLFILLED':
+        case 'DELETE_BOOKS_FULFILLED':
             return{
                 ...state,
                 isLoading:false,
-                isFullfilled:true,
+                isFulfilled:true,
                 booksList: state.booksList.filter((books) => {
                     return books.bookid !== action.payload.data.data.bookid
                 })
@@ -99,19 +126,20 @@ const books = (state = initState, action) => {
                 ...state,
                 isLoading:true,
                 isRejected:false,
-                isFullfilled:false
+                isFulfilled:false
             }
         case 'GET_BOOKS_PUBLISH_REJECTED':
             return{
                 ...state,
                 isLoading:false,
                 isRejected:true,
+                errMessage:action.payload.response.data.message
             }
-        case 'GET_BOOKS_PUBLISH_FULLFILLED':
+        case 'GET_BOOKS_PUBLISH_FULFILLED':
             return{
                 ...state,
                 isLoading:false,
-                isFullfilled:true,
+                isFulfilled:true,
                 publishList: action.payload.data.data
             }
         case 'GET_POPULAR_BOOKS_PENDING':
@@ -119,19 +147,20 @@ const books = (state = initState, action) => {
                 ...state,
                 isLoading:true,
                 isRejected:false,
-                isFullfilled:false
+                isFulfilled:false
             }
         case 'GET_POPULAR_BOOKS_REJECTED':
             return{
                 ...state,
                 isLoading:false,
-                isRejected:true
+                isRejected:true,
+                errMessage:action.payload.response.data.message
             }
-        case 'GET_POPULAR_BOOKS_FULLFILLED':
+        case 'GET_POPULAR_BOOKS_FULFILLED':
             return{
                 ...state,
                 isLoading:false,
-                isFullfilled:true,
+                isFulfilled:true,
                 popularBooksList: action.payload.data.data
             }
         default:

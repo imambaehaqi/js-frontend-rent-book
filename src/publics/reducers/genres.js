@@ -61,6 +61,7 @@ const genres = (state = initState, action) => {
                 isRejected:true
             }
         case 'EDIT_GENRES_FULLFILLED':
+            const newGenreData = action.payload.data.data
             return{
                 ...state,
                 isLoading:false,

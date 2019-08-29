@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Axios from 'axios'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'

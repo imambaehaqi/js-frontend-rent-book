@@ -17,7 +17,7 @@ class BookCard extends Component {
     this.redirectToDetails = this.redirectToDetails.bind(this)
   }
 
-  redirectToDetails = () =>{
+  redirectToDetails = () => {
     this.setState({redirectToDetails:true})
   }
 

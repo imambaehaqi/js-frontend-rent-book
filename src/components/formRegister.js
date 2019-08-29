@@ -25,8 +25,8 @@ class formRegister extends Component {
     this.setState({showModal: false})
   }
 
-  handleChange (event) {
-    const newFormData = { ...this.state.formData }
+  handleChange = (event) => {
+    let newFormData = {...this.state.formData}
     const target = event.target
     const name = target.name
     const value = target.value
@@ -58,7 +58,7 @@ class formRegister extends Component {
   render () {
     return (
       <div>
-        <div style={{ marginLeft: '0px' }}>
+        <div>
           <h1>Register</h1>
           <a>Welcome Back, Please Register<br />to create account</a>
         </div>

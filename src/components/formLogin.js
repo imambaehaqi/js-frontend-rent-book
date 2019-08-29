@@ -1,12 +1,11 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Link, Redirect } from 'react-router-dom'
+import {connect} from 'react-redux'
 
 import { Form, Button } from 'react-bootstrap'
-
-import {connect} from 'react-redux'
 import {login} from '../publics/actions/users'
 
-class formLogin extends Component {
+class formLogin extends React.Component {
   constructor(props){
     super(props)
     this.state = {
@@ -14,18 +13,21 @@ class formLogin extends Component {
       email: '',
       password:'',
       loggedIn:false,
-    }
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+      showModal:false,
+      modalTitle:'',
+      modalMessage:''
+  }
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
+    const target = event.target
+    const value = target.value
+    const name = target.name
     this.setState({
       [name]: value
-    });
+    })
   }
 
   handleSubmit = async (event) => {
@@ -33,11 +35,22 @@ class formLogin extends Component {
     const data = {
       email: this.state.email, 
       password: this.state.password
-    }
-    await this.props.dispatch(login(data))
-    window.localStorage.setItem("token", this.props.users.token)
-    this.setState({
-      loggedIn:true
+  }
+
+  this.props.dispatch(login(data))
+    .then (res => {
+      window.localStorage.setItem("token", res.action.payload.data.token)
+      this.setState({
+        loggedIn:true
+      })
+    })
+
+    .catch (() => {
+      this.setState({
+        showModal:true,
+        modalTitle:"Failed",
+        modalMessage:this.props.user.errMessage
+      })
     })
   }
 
@@ -45,7 +58,7 @@ class formLogin extends Component {
     if(window.localStorage.getItem("token")) return <Redirect to="../"/>
     else return (
       <div>
-        <div style={{ marginLeft: '0px' }}>
+        <div>
           <h1>Login</h1>
           <a>Welcome Back, Please Login<br />to your account</a>
         </div>
@@ -82,5 +95,4 @@ const mapStateToProps = state => {
     users: state.users
   }
 }
-
 export default connect(mapStateToProps)(formLogin)

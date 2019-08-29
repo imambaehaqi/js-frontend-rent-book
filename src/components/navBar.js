@@ -1,6 +1,5 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
-
 import { connect } from 'react-redux'
 
 import { Navbar, Nav, Button } from 'react-bootstrap'
@@ -9,7 +8,7 @@ import DropDownTimes from './dropDownTimes'
 import DropDownSortBy from './dropDownSort'
 import SideBarUser from './sideBar'
 import BooksList from './bookList'
-import SearchBooks from './searchBooks'
+import {SearchBooks} from '../components/searchBooks'
 import CarouselBooks from './carouselBooks'
 
 import Sidebar from 'react-sidebar'

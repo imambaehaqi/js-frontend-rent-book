@@ -14,8 +14,8 @@ class ModalAddBorrow extends React.Component{
       <Fragment>
         <Button 
           className= {this.props.className}
-          variant={this.props.variant || "light"} 
-          size="lg"
+          variant={this.props.variant || "light"}
+          size = "lg"
           onClick={() => {this.setState({showModal:true})}}>
           Borrow
         </Button>

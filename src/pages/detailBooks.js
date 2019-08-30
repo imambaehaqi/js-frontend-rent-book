@@ -6,7 +6,7 @@ import {returnBook, getLatestBorrowBook} from '../publics/actions/borrows'
 import store from '../publics/store'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
-import {Alert, Modal, Button} from 'react-bootstrap'
+import {Alert, Modal, Button, Badge} from 'react-bootstrap'
 import ModalEditBook from '../components/modalEditBook'
 import ModalAddBorrow from '../components/modalAddBorrow'
 import {Link} from 'react-router-dom'
@@ -147,15 +147,17 @@ class detailBooks extends Component {
           <div className='container-fluid'>
             <div className='row'>
               <div className='col-md-12 p-0'>
-                <div className='bg-header'><img src={bookData.image} />
+                <div className='bg-header' style={{ backgroundImage: `url('${bookData.image}')` }}>
                   <div className='col-8 col-sm-6 p-3'>
-                    <Link to="../../home" class='btn btn-warning'><FontAwesomeIcon icon={faArrowLeft} /></Link>
+                    <Link to="../../home" class='btn btn-warning' style={{position:'fixed'}}>
+                      <FontAwesomeIcon icon={faArrowLeft} />
+                    </Link>
                   </div>
                   {this.state.userData.level === 'admin' ? 
                     <div className='d-flex align-items-end flex-column bd-highlight mb-3' style={{ height: '200px' }}>
-                      <div className='p-2 bd-highlight' style={{ marginTop: '-60px' }}>
-                        <ModalEditBook/>
-                        <Button variant="warning" size="lg" onClick={this.handleDelete}>Delete</Button>
+                      <div className='p-2 bd-highlight' style={{ marginTop: '-25px' }}>
+                        <ModalEditBook/><a>&nbsp;</a>
+                        <Button variant="warning" onClick={this.handleDelete}>Delete</Button>
                       </div>
                     </div>
                   :''}
@@ -168,16 +170,18 @@ class detailBooks extends Component {
               <div class='p-2 w-100 bd-highlight'>
                 <div class='row'>
                   <div className='col-sm-8 mb-12 p-2'>
-                  {bookData.genre}
+                    <Badge pill variant="warning">{this.props.genres.genreList.find(genre => genre.genreid == bookData.genreid).name}</Badge>
                   </div>
                   <div className='col-sm-0 mb-0 p-0 bd-highlight' style={{ marginLeft: '95vh' }}>
-                    <font color='green'><h2>{bookData.available === 1 ? "Available": "Not Available"}</h2></font>
+                    {bookData.available === 1 ? 
+                      <font color='green'><h3>Available</h3></font> : 
+                      <font color='red'><h3>Not Available</h3></font>}
                   </div>
                 </div>
                 <div className='d-flex align-items-start flex-column bd-highlight mb-3'>
                   <div class='p-0 bd-highlight'>
                     <font>
-                      <h1>{bookData.title}</h1>
+                      <h2>{bookData.title}</h2>
                     </font>
                   </div>
                   <div class='p-0 mb-3 bd-highlight'>
@@ -193,7 +197,7 @@ class detailBooks extends Component {
               <div class='row align-items-start' style={{ marginLeft: '20vh' }}>
                 <div class='row justify-content-start'>
                   <div class='col-6 col-md-4'>
-                    <figure className='bocil' src={bookData.image} />
+                    <div className='bocil' style={{ backgroundImage: `url('${bookData.image}')`}}></div>
                   </div>
                 </div>
                 <div class='row justify-content-end'>
@@ -232,7 +236,8 @@ const mapStateToProps = (state) => {
   return{
     books: state.books,
     users: state.users,
-    borrows: state.borrows
+    borrows: state.borrows,
+    genres: state.genres
   }
 }
 

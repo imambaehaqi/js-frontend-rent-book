@@ -56,7 +56,7 @@ class FormEditBook extends React.Component{
 
     componentDidMount = async () => {
         await this.props.dispatch(getGenres())
-        this.setState ({genreList: this.props.genres.genreList})
+        this.setState ({genreList: this.props.genre.genreList})
     }
 
     render(){

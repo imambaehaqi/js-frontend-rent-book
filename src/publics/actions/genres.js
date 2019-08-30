@@ -1,6 +1,5 @@
 import Axios from 'axios'
 
-
 export const getGenres = () => {
     return {
         type: 'GET_GENRES',
@@ -23,10 +22,10 @@ export const addGenre = (data) => {
     }
 }
 
-export const deleteGenre = (genreid) => {
+export const deleteGenre = (id) => {
     return {
         type: 'DELETE_GENRE',
-        payload: Axios.delete(`http://localhost:1150/genres/${genreid}`, {
+        payload: Axios.delete(`http://localhost:1150/genres/${id}`, {
             headers:{
                 Authorization: window.localStorage.getItem("token")
             }
@@ -34,10 +33,10 @@ export const deleteGenre = (genreid) => {
     }
 }
 
-export const editGenre = (genreid, data) => {
+export const editGenre = (id, data) => {
     return {
         type: 'EDIT_GENRE',
-        payload: Axios.patch(`http://localhost:1150/genres/${genreid}`, data, {
+        payload: Axios.patch(`http://localhost:1150/genres/${id}`, data, {
             headers:{
                 Authorization: window.localStorage.getItem("token")
             }

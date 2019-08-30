@@ -58,18 +58,18 @@ class formLogin extends React.Component {
   render () {
     if(window.localStorage.getItem("token")) return <Redirect to="../"/>
     else return (
-      <div>
+      <div className="container">
         <h1>Login</h1>
-        <h3>Welcome Back, Please Login<br />to your account</h3>
-        <Form className='shadow col-lg-7' style={this.state.style} onSubmit={this.handleSubmit}>
-          <Form.Group controlId='formBasicEmail' style={{ marginLeft: '10px' }}>
+        <h6>Welcome Back, Please Login<br />to your account</h6>
+        <Form className='shadow col-lg-8' style={this.state.style} onSubmit={this.handleSubmit}>
+          <Form.Group controlId='formBasicEmail'>
             <Form.Text className='text-muted'>
                           Email:
             </Form.Text>
             <Form.Control type='email' placeholder='Enter email' name="email"
               onChange={this.handleChange}/>
           </Form.Group>
-          <Form.Group controlId='formBasicPassword' style={{ marginLeft: '10px' }}>
+          <Form.Group controlId='formBasicPassword'>
             <Form.Text className='text-muted'>
                           Password:
             </Form.Text>

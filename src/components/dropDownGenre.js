@@ -18,8 +18,9 @@ class DropDownGenre extends React.Component{
 
   componentDidMount = async () => {
     await this.props.dispatch(getGenres())
-    this.setState ({genreList: this.props.genre.genreList})
-  };
+    this.setState ({genreList: this.props.genres.genreList})
+  }
+
   render() {
     const {genreList} = this.state
     return(

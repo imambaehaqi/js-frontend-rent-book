@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Route } from 'react-router-dom'
-import { Navbar, Nav, Button } from 'react-bootstrap'
+import { Navbar, Nav, Button, Image } from 'react-bootstrap'
 import Sidebar from 'react-sidebar'
 
 import CarouselBooks from '../components/carouselBooks'
@@ -62,7 +62,7 @@ class home extends React.Component {
             <SearchBook history={this.props.history}/>
           </Nav>
           <Navbar.Brand href="/">
-            <figure src={require('../bookshelf.svg')} style={{ width: '50px', height: '50px' }} />
+            <Image src={require('../bookshelf.svg')} style={{width:'50px', height:'50px'}}/>
             <b>Book's</b>
           </Navbar.Brand>
         </Navbar>
@@ -92,7 +92,7 @@ class home extends React.Component {
           render={({history}) => {
             let params = new URLSearchParams(window.location.search)
             return(
-              <div>
+              <div className="p-5">
                 <BooksList
                   available={params.get("available")} 
                   history={history}

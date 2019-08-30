@@ -14,7 +14,6 @@ class ModalEditBook extends React.Component{
       <Fragment>
         <Button 
           variant={this.props.variant || "warning"} 
-          size="lg"
           onClick={() => {this.setState({showModal:true})}}>
           Edit Book
         </Button>

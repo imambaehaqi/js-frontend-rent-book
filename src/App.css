@@ -41,52 +41,37 @@
   background-size: 100%;
 }
 
-.container form{
-  padding-top: 4vh;
-  padding-left: 5vh;
-  padding-bottom: 5vh;
-}
-
-.container ul{
-  margin-left: 10vh;
-  justify-content: space-between;
-}
-
-.container form input{
-  width: 60%;
-}
-
 .text-margin{
   margin-left: 13px;
   color: whitesmoke;
 }
 
 .text-margin h1{
-  padding-top: 280px;
-  font-size: 48px
+  text-shadow: 2px 2px black;
+  font-size: 72px;
+  padding-top: 260px;
 }
 
-.text-margin h3{
-  font-size: 14px;
-  padding-top: 214px;
+.text-margin h6{
+  text-shadow: 2px 2px black;
+  padding-top: 174px;
 }
 
 .right-form{
   position: relative;
   background-color: white;
+  margin-left: 70px;
 }
 
 .right-form img{
-  margin-left: 550px;
+  margin-left: 480px;
 }
-
+/* 
 .right-form div{
   margin-left: 30px;
-}
+} */
 
 .right-form h6{
-  padding-top: 12vh;
-  margin-left: 55px;
   text-align: justify;
 }
 
@@ -105,16 +90,17 @@
 
 .bg-header{
   width: 100%;
+  box-shadow: 10px 10px 16px -7px rgba(0,0,0,0.54);
   height: 270px;
 }
 
 .bocil{
   margin-top: -100px;
-  width: 350%;
   border-radius:10px;
   box-shadow: 10px 10px 16px -7px rgba(0,0,0,0.54);
   margin-bottom:40px;
-  margin-bottom: 50px;
+  width: 200px;
+  height: 250px;
 }
 
 .card{

@@ -3,7 +3,7 @@ import {Form, InputGroup,FormControl} from 'react-bootstrap'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 
-export const SearchBook = (props)=>{
+export const SearchBook = (props) => {
   return (
     <Form inline>
       <InputGroup>

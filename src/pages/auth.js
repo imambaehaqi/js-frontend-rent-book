@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 
+import { Image } from 'react-bootstrap'
+
 import FormLogin from '../components/formLogin'
 import FormRegister from '../components/formRegister'
 
@@ -28,13 +30,13 @@ class auth extends Component {
                 <h1>Book is a window<br />to the world</h1>
               </div>
               <div>
-                <h3>Photo by Mark Pan4ratte on Unsplash</h3>
+                <h6>Photo by Mark Pan4ratte on Unsplash</h6>
               </div>
             </div>
           </div>
         </div>
         <div className='right-form'>
-          <figure src={require('../bookshelf.svg')}/>
+          <Image src={require('../bookshelf.svg')} style={{width:'100px', height:'100px'}}/>
           <Route
             path={'/login'}
             render={() => {
@@ -57,9 +59,11 @@ class auth extends Component {
             }}
           />
           <br />
-          <h6>By signing up, you agree to Book's
-            <br />Terms and Conditions & Privacy Policy
-          </h6>
+          <div className="container">
+            <h6>By signing up, you agree to Book's
+              <br />Terms and Conditions & Privacy Policy
+            </h6>
+          </div>
         </div>
       </div>
     )

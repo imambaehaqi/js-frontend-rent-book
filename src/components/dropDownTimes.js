@@ -13,12 +13,12 @@ class DropDownPublish extends React.Component{
   }
   
   goToYearPath = (year) =>{
-    this.state.history.push(`/home/year/${year}/`)
+    this.state.history.push(`/home/year/${year}`)
   }
 
   componentDidMount = async () => {
     await this.props.dispatch(getBookPublish())
-    this.setState ({publishList: this.props.book.publishList})
+    this.setState ({publishList: this.props.books.publishList})
   }
 
   render() {
@@ -39,6 +39,7 @@ class DropDownPublish extends React.Component{
     )
   }
 }
+
 const mapStateToProps = state => {
   return{
     books: state.books

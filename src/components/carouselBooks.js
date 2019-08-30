@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 
 import {getBookPopular} from '../publics/actions/books'
 
-import { Carousel } from 'react-bootstrap'
+import { Carousel, Image } from 'react-bootstrap'
 
 class carouselBooks extends Component {
   constructor(props){
@@ -26,17 +26,16 @@ class carouselBooks extends Component {
   render () {
     const {popularBooksList} = this.state
     return (
-      <Carousel style={{ marginTop: '90px' }}>
+      <Carousel style={{ marginTop: '100px' }}>
         {popularBooksList !== null ? popularBooksList.map((books, index) => {
           return (
             <Carousel.Item key={index} onClick={()=>this.getDetails(books.bookid)}>
-              <h1 className="shadow-lg" style={{textAlign:'center'}}>Popular Book's</h1>
-              <figure
+              <Image
                 style={{height:'450px'}}
                 className='w-50 align-item-center shadow-lg mb-5'
                 src={books.image}
               />
-            <Carousel.Caption className="box-shadow" style={{backgroundColor:'black'}}>
+            <Carousel.Caption className="shadow-lg" style={{backgroundColor:'black'}}>
               <h4>{books.title}</h4>
             </Carousel.Caption>
           </Carousel.Item>

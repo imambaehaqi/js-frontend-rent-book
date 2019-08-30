@@ -35,7 +35,7 @@ class BooksList extends React.Component{
   render(){
     const {data} = this.state
     return(
-        <div style={{marginTop:"3vh", padding:"3vw", textAlign:"left"}}>
+        <div style={{marginTop:"10vh", padding:"3vw", textAlign:"left"}}>
           <div style={{display: 'flex', flexWrap:"wrap", flexDirection: 'row'}} className="justify-content-between">
             {
                data !== null && data.booksList ? 
@@ -47,7 +47,7 @@ class BooksList extends React.Component{
                       key={books.bookid}
                       image={books.image} 
                       available={books.available}
-                      genre={books.genreid}
+                      genreid={books.genreid}
                       bookid={books.bookid}
                       title={books.title}
                       description={books.description.substr(0,75)+'...'} />

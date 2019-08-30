@@ -26,16 +26,17 @@ class carouselBooks extends Component {
   render () {
     const {popularBooksList} = this.state
     return (
-      <Carousel style={{ marginTop: '100px' }}>
+      <Carousel style={{ marginTop: '90px' }}>
         {popularBooksList !== null ? popularBooksList.map((books, index) => {
           return (
             <Carousel.Item key={index} onClick={()=>this.getDetails(books.bookid)}>
+              <h1 className="shadow-lg" style={{textAlign:'center'}}>Popular Book's</h1>
               <img
+                style={{height:'450px'}}
                 className='w-50 align-item-center shadow-lg mb-5'
                 src={books.image}
-                alt={books.title}
               />
-            <Carousel.Caption bsPrefix="carousel-caption">
+            <Carousel.Caption className="box-shadow" style={{backgroundColor:'black'}}>
               <h4>{books.title}</h4>
             </Carousel.Caption>
           </Carousel.Item>

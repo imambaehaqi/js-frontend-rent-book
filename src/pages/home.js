@@ -58,7 +58,7 @@ class home extends React.Component {
             </Button><a>&nbsp;</a>
             <DropDownCats history={this.props.history}/><a>&nbsp;</a>
             <DropDownTimes history={this.props.history}/><a>&nbsp;</a>
-            {/* <DropDownSortBy history={this.props.history}/><a>&nbsp;</a> */}
+            <DropDownSortBy history={this.props.history}/><a>&nbsp;</a>
             <SearchBooks history={this.props.history}/><a></a>
           </Nav>
           <Navbar.Brand href="/">
@@ -72,7 +72,7 @@ class home extends React.Component {
           render={({history}) => {
             let params = new URLSearchParams(window.location.search)
             return(
-              <div className="container">
+              <div className="container md-5">
                 <CarouselBooks history={history}/><hr/>
                 <h1>List Book's</h1><hr/>
                 <BooksList 
@@ -125,13 +125,13 @@ class home extends React.Component {
         <Route 
           path="/home/genre/:genre" 
           component={(url) => {
-            return <BooksList dataSource={`http://localhost:1150/books/genres/${url.match.params.genres}`}/>;
+            return <BooksList dataSource={`http://localhost:1150/books/genre/${url.match.params.genre}`}/>;
           }} 
         />
         <Route 
-          path="/home/publish/:publish" 
+          path="/home/year/:year" 
           component={(url) => {
-            return <BooksList dataSource={`http://localhost:1150/books/year/${url.match.params.publish}`}/>;
+            return <BooksList dataSource={`http://localhost:1150/books/publish/${url.match.params.publish}`}/>;
           }} 
         />
       </div>

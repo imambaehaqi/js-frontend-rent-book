@@ -32,7 +32,7 @@ class dropDownCat extends Component {
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                     {genreList.length > 0 ?
-                    genreList.map((genre) => {
+                        genreList.map((genre) => {
                     return <Dropdown.Item key = {genre.name}
                             onClick={() => {this.goToGenrePath(genre.name)}}>
                             {genre.name}

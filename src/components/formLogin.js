@@ -83,8 +83,8 @@ class formLogin extends React.Component {
             <Button variant='dark' type='submit'>
                         Login
             </Button><a>&nbsp;</a>
+            <Link to='./register' className='btn btn-light' >SignUp</Link>
           </Form>
-          <Link to='./register' className='btn btn-light' >SignUp</Link>
         </div>
       </div>
     )

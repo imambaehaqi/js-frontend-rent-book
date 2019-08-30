@@ -7,6 +7,7 @@ import './App.css'
 import Auth from './pages/auth'
 import Home from './pages/home'
 import DetailBook from './pages/detailBooks'
+
 import store from './publics/store'
 
 const App = () => {
@@ -31,10 +32,12 @@ const App = () => {
             />
             <Route
               path={'/book/:id'}
-              component={({props}) => {
-                return <DetailBook {...props} bookId={props.match.params.id} 
-                  bookUrl={`http://localhost:1150/books/${props.match.params.id}`} 
-                  key={props.history.location}/>;
+              component={(props) => {
+                return <DetailBook 
+                {...props} bookId={props.match.params.bookid} 
+                bookUrl={`http://localhost:1150/books/${props.match.params.id}`}
+                bookid = {props.match.params.id} 
+                key={props.history.location}/>
               }} 
             />
             <Route

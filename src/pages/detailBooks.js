@@ -3,12 +3,13 @@ import {connect} from 'react-redux'
 import {deleteBook, getBookById} from '../publics/actions/books'
 import {getProfile} from '../publics/actions/users'
 import {returnBook, getLatestBorrowBook} from '../publics/actions/borrows'
-import AddBookForm from '../components/modalAddBook'
-import EditBookForm from '../components/modalEditForm'
 import store from '../publics/store'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import {Alert, Modal, Button} from 'react-bootstrap'
+import ModalEditBook from '../components/modalEditBook'
+import ModalAddBorrow from '../components/modalAddBorrow'
+import {Link} from 'react-router-dom'
 
 class detailBooks extends Component {
   constructor(props){
@@ -146,17 +147,15 @@ class detailBooks extends Component {
           <div className='container-fluid'>
             <div className='row'>
               <div className='col-md-12 p-0'>
-                <div className='bg-header' src={bookData.image}>
+                <div className='bg-header'><img src={bookData.image} />
                   <div className='col-8 col-sm-6 p-3'>
-                    <button type='button' class='btn btn-warning' aria-hidden='true'>
-                      <FontAwesomeIcon icon={faArrowLeft} />
-                    </button>
+                    <Link to="../../home" class='btn btn-warning'><FontAwesomeIcon icon={faArrowLeft} /></Link>
                   </div>
                   {this.state.userData.level === 'admin' ? 
                     <div className='d-flex align-items-end flex-column bd-highlight mb-3' style={{ height: '200px' }}>
                       <div className='p-2 bd-highlight' style={{ marginTop: '-60px' }}>
-                        <EditBookForm/>
-                        <button type='button' class='btn btn-warning' />
+                        <ModalEditBook/>
+                        <Button variant="warning" size="lg" onClick={this.handleDelete}>Delete</Button>
                       </div>
                     </div>
                   :''}
@@ -198,17 +197,14 @@ class detailBooks extends Component {
                   </div>
                 </div>
                 <div class='row justify-content-end'>
-                
                   <div class='col-4 col-md-8'>
                     {this.state.userData.level === 'admin' ? 
                       bookData.available === 1 ?
-                      <AddBookForm bookId={bookData.bookid} variant="warning" />
+                      <ModalAddBorrow bookId={bookData.bookid} variant="warning" />
                       :
                       <button type='button' class='btn btn-warning' onClick={this.handleReturn}>
                         <h4>Return</h4>
                       </button> :''}
-
-                    
                   </div>
                 </div>
               </div>

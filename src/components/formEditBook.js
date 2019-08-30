@@ -7,7 +7,7 @@ import {Modal, Row, Col, Form, Button} from 'react-bootstrap'
 import {editBook} from '../publics/actions/books'
 import {getGenres} from '../publics/actions/genres'
 
-class EditBookForm extends React.Component{
+class FormEditBook extends React.Component{
     constructor(props){
         super(props)
         this.state = {
@@ -140,4 +140,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(EditBookForm)
+export default connect(mapStateToProps)(FormEditBook)

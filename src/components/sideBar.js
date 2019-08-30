@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {Container, Row, Button} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
-
 import {connect} from 'react-redux'
 import {getProfile} from '../publics/actions/users'
 import ModalAddBook from './modalAddBook'

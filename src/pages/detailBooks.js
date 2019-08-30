@@ -1,18 +1,13 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-
 import {deleteBook, getBookById} from '../publics/actions/books'
 import {getProfile} from '../publics/actions/users'
 import {returnBook, getLatestBorrowBook} from '../publics/actions/borrows'
-
 import AddBookForm from '../components/modalAddBook'
 import EditBookForm from '../components/modalEditForm'
-
 import store from '../publics/store'
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
-
 import {Alert, Modal, Button} from 'react-bootstrap'
 
 class detailBooks extends Component {
@@ -33,7 +28,7 @@ class detailBooks extends Component {
 
   listener = () => {
     const current = store.getState().books.booksList.find ((books) => {
-      return books.bookid == Number(this.props.bookid)
+      return books.bookid === Number(this.props.bookid)
     })
     console.log(current, this.state.bookData)
     if(current !== this.state.bookData){
@@ -45,7 +40,7 @@ class detailBooks extends Component {
     await this.props.dispatch(getBookById(this.props.bookid))
     this.setState(
       {bookData: this.props.books.booksList.find((books) => {
-        return books.bookid == Number(this.props.bookid)
+        return books.bookid === Number(this.props.bookid)
       })},
       async () => {
         console.log(this.state)
@@ -146,8 +141,6 @@ class detailBooks extends Component {
       )
     } else {
       let stringDateReleased = new Date (bookData.released).toDateString()
-      const newImageUrl = bookData.image.includes('yenpress') ? bookData.image.split('w=')[0]
-      + `w = ${window.innerWidth}`: bookData.image
       return (
         <div>
           <div className='container-fluid'>
@@ -163,7 +156,6 @@ class detailBooks extends Component {
                     <div className='d-flex align-items-end flex-column bd-highlight mb-3' style={{ height: '200px' }}>
                       <div className='p-2 bd-highlight' style={{ marginTop: '-60px' }}>
                         <EditBookForm/>
-                        <a>&nbsp;</a>
                         <button type='button' class='btn btn-warning' />
                       </div>
                     </div>
@@ -177,9 +169,9 @@ class detailBooks extends Component {
               <div class='p-2 w-100 bd-highlight'>
                 <div class='row'>
                   <div className='col-sm-8 mb-12 p-2'>
-                    <a class='rounded' style={{ backgroundColor: '#ffcc00' }}>&nbsp;{bookData.genres}&nbsp;</a>
+                  {bookData.genre}
                   </div>
-                  <div className='col-sm-0 mb-0 p-0 bd-highlight' style={{ marginLeft: '100vh' }}>
+                  <div className='col-sm-0 mb-0 p-0 bd-highlight' style={{ marginLeft: '95vh' }}>
                     <font color='green'><h2>{bookData.available === 1 ? "Available": "Not Available"}</h2></font>
                   </div>
                 </div>
@@ -202,7 +194,7 @@ class detailBooks extends Component {
               <div class='row align-items-start' style={{ marginLeft: '20vh' }}>
                 <div class='row justify-content-start'>
                   <div class='col-6 col-md-4'>
-                    <img className='bocil' src={bookData.image} />
+                    <figure className='bocil' src={bookData.image} />
                   </div>
                 </div>
                 <div class='row justify-content-end'>

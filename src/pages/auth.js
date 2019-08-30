@@ -34,7 +34,7 @@ class auth extends Component {
           </div>
         </div>
         <div className='right-form'>
-          <img src={require('../bookshelf.svg')} />
+          <figure src={require('../bookshelf.svg')}/>
           <Route
             path={'/login'}
             render={() => {
@@ -57,11 +57,9 @@ class auth extends Component {
             }}
           />
           <br />
-          <div>
-            <h6>By signing up, you agree to Book's
-              <br />Terms and Conditions <a>&</a> Privacy Policy
-            </h6>
-          </div>
+          <h6>By signing up, you agree to Book's
+            <br />Terms and Conditions & Privacy Policy
+          </h6>
         </div>
       </div>
     )

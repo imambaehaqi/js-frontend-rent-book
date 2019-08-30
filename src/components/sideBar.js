@@ -37,7 +37,7 @@ class sideBar extends Component {
   render(){
     return (
       <div>
-          <img className="dashboard" src={this.state.image}/><hr/>
+          <figure className="dashboard" src={this.state.image}/><hr/>
           <h3 style={{textAlign:'center'}}>Hello ..</h3>
           <h4 style={{textAlign:'center'}}>{this.state.fullname}</h4><hr/>
           <Container className="sidebar-buttons ">

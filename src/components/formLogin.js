@@ -59,33 +59,28 @@ class formLogin extends React.Component {
     if(window.localStorage.getItem("token")) return <Redirect to="../"/>
     else return (
       <div>
-        <div>
-          <h1>Login</h1>
-          <a>Welcome Back, Please Login<br />to your account</a>
-        </div>
-        <div>
-          <Form className='shadow col-lg-7' style={this.state.style} onSubmit={this.handleSubmit}
-            style={{ paddingTop: '8px', paddingBottom: '5px', marginBottom: '10px', marginTop: '10px' }}>
-            <Form.Group controlId='formBasicEmail' style={{ marginLeft: '10px' }}>
-              <Form.Text className='text-muted'>
-                            Email:
-              </Form.Text>
-              <Form.Control type='email' placeholder='Enter email' name="email"
-                onChange={this.handleChange}/>
-            </Form.Group>
-            <Form.Group controlId='formBasicPassword' style={{ marginLeft: '10px' }}>
-              <Form.Text className='text-muted'>
-                            Password:
-              </Form.Text>
-              <Form.Control type='password' placeholder='Password' name="password"
-                onChange={this.handleChange}/>
-            </Form.Group>
-            <Button variant='dark' type='submit'>
-                        Login
-            </Button><a>&nbsp;</a>
-            <Link to='./register' className='btn btn-light' >SignUp</Link>
-          </Form>
-        </div>
+        <h1>Login</h1>
+        <h3>Welcome Back, Please Login<br />to your account</h3>
+        <Form className='shadow col-lg-7' style={this.state.style} onSubmit={this.handleSubmit}>
+          <Form.Group controlId='formBasicEmail' style={{ marginLeft: '10px' }}>
+            <Form.Text className='text-muted'>
+                          Email:
+            </Form.Text>
+            <Form.Control type='email' placeholder='Enter email' name="email"
+              onChange={this.handleChange}/>
+          </Form.Group>
+          <Form.Group controlId='formBasicPassword' style={{ marginLeft: '10px' }}>
+            <Form.Text className='text-muted'>
+                          Password:
+            </Form.Text>
+            <Form.Control type='password' placeholder='Password' name="password"
+              onChange={this.handleChange}/>
+          </Form.Group>
+          <Button variant='dark' type='submit'>
+                      Login
+          </Button>
+          <Link to='./register' className='btn btn-light'>SignUp</Link>
+        </Form>
       </div>
     )
   }

@@ -31,7 +31,7 @@ class carouselBooks extends Component {
           return (
             <Carousel.Item key={index} onClick={()=>this.getDetails(books.bookid)}>
               <h1 className="shadow-lg" style={{textAlign:'center'}}>Popular Book's</h1>
-              <img
+              <figure
                 style={{height:'450px'}}
                 className='w-50 align-item-center shadow-lg mb-5'
                 src={books.image}

@@ -1,12 +1,11 @@
-import React,{Fragment} from 'react'
+import React,{Fragment} from 'react';
 
 const onClickPlus = () => {
   const curr = window.location.href
   let newHref = window.location.origin
   const containsSearchQuery = curr.includes('?')
   const containsPageQuery = curr.includes('page')
-
-  if (containsPageQuery) {
+  if(containsPageQuery){
     let index = curr.indexOf("page")
     let nextPage = Number(curr.charAt( (index+5) )) + 1
     newHref = curr.replace(curr.substr(index, 6),`page=${nextPage}`)
@@ -15,7 +14,7 @@ const onClickPlus = () => {
   } else {
     newHref = curr.concat('?page=2')
   }
-    window.location.href = newHref
+  window.location.href = newHref
 }
 
 const onClickMinus = () => {
@@ -43,20 +42,19 @@ const getNextPageUrl = () => {
   return newHref
 }
 
-const getPrevPageUrl = () =>{
+const getPrevPageUrl = () => {
   const curr = window.location.search
   let index = curr.indexOf("page")
   let prevPage = Number(curr.charAt( (index+5) )) - 1
-
   return curr.replace(curr.substr(index, 6),`page=${prevPage}`)
 }
 
-export default function Pagination({ match }) {
+export default function Pagination({ match }){
   console.log(match)
   const params= window.location.search
   const hasPrevPage = !params.includes("page") || params.includes("page=1")
   const page = params.includes("page") ? params.charAt(params.indexOf("page") + 5) : 1
-  return (
+  return(
     <Fragment>
     </Fragment>
   )

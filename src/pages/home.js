@@ -6,11 +6,11 @@ import Sidebar from 'react-sidebar'
 
 import CarouselBooks from '../components/carouselBooks'
 import BooksList from '../components/bookList'
-import DropDownCats from '../components/dropDownCats'
+import DropDownGenre from '../components/dropDownGenre'
 import DropDownTimes from '../components/dropDownTimes'
 import DropDownSortBy from '../components/dropDownSort'
 import SideBarUser from '../components/sideBar'
-import {SearchBooks} from '../components/searchBooks'
+import { SearchBook } from '../components/searchBooks'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
@@ -55,14 +55,14 @@ class home extends React.Component {
           <Nav className='mr-auto'>
             <Button variant='light' onClick={() => this.onSetSidebarOpen(true)}>
               <FontAwesomeIcon icon={faBars} />
-            </Button><a>&nbsp;</a>
-            <DropDownCats history={this.props.history}/><a>&nbsp;</a>
-            <DropDownTimes history={this.props.history}/><a>&nbsp;</a>
-            <DropDownSortBy history={this.props.history}/><a>&nbsp;</a>
-            <SearchBooks history={this.props.history}/><a></a>
+            </Button>
+            <DropDownGenre history={this.props.history}/>
+            <DropDownTimes history={this.props.history}/>
+            <DropDownSortBy history={this.props.history}/>
+            <SearchBook history={this.props.history}/>
           </Nav>
           <Navbar.Brand href="/">
-            <img src={require('../bookshelf.svg')} style={{ width: '50px', height: '50px' }} />
+            <figure src={require('../bookshelf.svg')} style={{ width: '50px', height: '50px' }} />
             <b>Book's</b>
           </Navbar.Brand>
         </Navbar>
@@ -131,7 +131,7 @@ class home extends React.Component {
         <Route 
           path="/home/year/:year" 
           component={(url) => {
-            return <BooksList dataSource={`http://localhost:1150/books/publish/${url.match.params.publish}`}/>;
+            return <BooksList dataSource={`http://localhost:1150/books/publish/${url.match.params.year}`}/>;
           }} 
         />
       </div>

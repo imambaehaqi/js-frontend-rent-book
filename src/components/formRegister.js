@@ -60,33 +60,28 @@ class formRegister extends Component {
   render () {
     return (
       <div>
-        <div>
-          <h1>Register</h1>
-          <a>Welcome Back, Please Register<br />to create account</a>
-        </div>
-        <div >
-          <Form className='shadow col-lg-7' style={this.state.style} onSubmit={this.handleSubmit}
-            style={{ paddingTop: '8px', paddingBottom: '5px', marginBottom: '10px', marginTop: '10px' }}>
-            <Form.Group controlId='formBasicUsername' style={{ marginLeft: '10px' }}>
-              <Form.Text className='text-muted'>Username:</Form.Text>
-              <Form.Control name='username' type='text' onChange={this.handleChange} placeholder='Enter username' />
-            </Form.Group>
-            <Form.Group controlId='formBasicFullname' style={{ marginLeft: '10px' }}>
-              <Form.Text className='text-muted'>Fullname:</Form.Text>
-              <Form.Control name='fullname' type='text' onChange={this.handleChange} placeholder='Enter fullname' />
-            </Form.Group>
-            <Form.Group controlId='formBasicEmail' style={{ marginLeft: '10px' }}>
-              <Form.Text className='text-muted'>Email:</Form.Text>
-              <Form.Control name='email' type='email' onChange={this.handleChange} placeholder='Enter email' />
-            </Form.Group>
-            <Form.Group controlId='formBasicPassword' style={{ marginLeft: '10px' }}>
-              <Form.Text className='text-muted'>Password:</Form.Text>
-              <Form.Control name='password' type='password' onChange={this.handleChange} placeholder='Enter password' />
-            </Form.Group>
-            <Button variant='dark' type='submit' className='btn-black'>SignUp</Button><a>&nbsp;</a>
-            <Link to='./login' className='btn btn-light' >Login</Link>
-          </Form>
-        </div>
+        <h1>Register</h1>
+        <h3>Welcome Back, Please Register<br />to create account</h3>
+        <Form className='shadow col-lg-7' style={this.state.style} onSubmit={this.handleSubmit}>
+          <Form.Group controlId='formBasicUsername' style={{ marginLeft: '10px' }}>
+            <Form.Text className='text-muted'>Username:</Form.Text>
+            <Form.Control name='username' type='text' onChange={this.handleChange} placeholder='Enter username' />
+          </Form.Group>
+          <Form.Group controlId='formBasicFullname' style={{ marginLeft: '10px' }}>
+            <Form.Text className='text-muted'>Fullname:</Form.Text>
+            <Form.Control name='fullname' type='text' onChange={this.handleChange} placeholder='Enter fullname' />
+          </Form.Group>
+          <Form.Group controlId='formBasicEmail' style={{ marginLeft: '10px' }}>
+            <Form.Text className='text-muted'>Email:</Form.Text>
+            <Form.Control name='email' type='email' onChange={this.handleChange} placeholder='Enter email' />
+          </Form.Group>
+          <Form.Group controlId='formBasicPassword' style={{ marginLeft: '10px' }}>
+            <Form.Text className='text-muted'>Password:</Form.Text>
+            <Form.Control name='password' type='password' onChange={this.handleChange} placeholder='Enter password' />
+          </Form.Group>
+          <Button variant='dark' type='submit' className='btn-black'>SignUp</Button>
+          <Link to='./login' className='btn btn-light' >Login</Link>
+        </Form>
         <Modal show={this.state.showModal} onHide={this.handleClose}>
             <Modal.Header>
               <Modal.Title>{this.state.modalTitle}</Modal.Title>

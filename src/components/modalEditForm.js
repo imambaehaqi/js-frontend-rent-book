@@ -56,8 +56,8 @@ class EditBookForm extends React.Component{
 
     componentDidMount = async () => {
         await this.props.dispatch(getGenres())
-        this.setState ({genreList: this.props.genres.genresList})
-    };
+        this.setState ({genreList: this.props.genres.genreList})
+    }
 
     render(){
         const {genreList} = this.state
@@ -103,7 +103,7 @@ class EditBookForm extends React.Component{
                 <Form.Group as={Row} controlId="formPlaintextGenre">
                     <Form.Label column sm="2">Genre</Form.Label>
                     <Col sm="10">
-                    <Form.Control onChange={this.handleChange} as="select" name="genreid">
+                    <Form.Control onChange={this.handleChange} as="select" name="genre">
                         {genreList.length !== 0 ? genreList.map((genre) => {
                         const selected = this.state.genreid === genre.id 
                         return <option selected={selected} value={genre.id} key={genre.id}> {genre.name} </option>

@@ -2,7 +2,6 @@ import Axios from 'axios'
 
 const token = window.localStorage.getItem("token")
 
-
 export const getBooks = (dataSource, page = 1, sortby, search) => {
     let url = `${dataSource}?page=${page}`
     if(sortby !== null)
@@ -78,7 +77,7 @@ export const getBookPublish = () =>{
 export const getBookPopular = () =>{
     return{
         type: 'GET_POPULAR_BOOKS',
-        payload: Axios.get('http://localhost:1150/books/available',{
+        payload: Axios.get('http://localhost:1150/books/popular',{
             headers:{
                 Authorization: token
             }

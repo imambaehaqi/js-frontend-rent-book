@@ -13,7 +13,7 @@ class BookCard extends Component {
       title : props.title,
       description : props.description,
       available : props.available,
-      genre : props.genre,
+      genreid : props.genreid,
       redirectToDetails:false
     }
     this.redirectToDetails = this.redirectToDetails.bind(this)
@@ -40,7 +40,6 @@ class BookCard extends Component {
         </figure>
         <Card.Body>
           <Card.Title>{this.state.title}</Card.Title>
-          <Badge variant="warning">{this.state.genreid}</Badge>
           <Card.Text>
             {description.length > 30 ?  description.substr(0,75)+'...': description}
           </Card.Text>

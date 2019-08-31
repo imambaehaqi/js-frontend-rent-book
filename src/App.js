@@ -22,7 +22,7 @@ const App = () => {
             />
             <Route
               path={'/home'}
-              render={({props}) => {
+              render={(props) => {
                 return <Home {...props}/>
               }}
             />
@@ -38,13 +38,13 @@ const App = () => {
             />
             <Route
               path={'/login'}
-              render={({props}) => {
+              render={(props) => {
                 return <Auth {...props}/>
               }}
             />
             <Route
               path={'/register'}
-              render={({props}) => {
+              render={(props) => {
                 return <Auth {...props}/>
               }}
             />

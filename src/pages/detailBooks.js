@@ -170,7 +170,9 @@ class detailBooks extends Component {
               <div class='p-2 w-100 bd-highlight'>
                 <div class='row'>
                   <div className='col-sm-8 mb-12 p-2'>
-                    <Badge pill variant="warning">{this.props.genres.genreList.find(genre => genre.genreid == bookData.genreid).name}</Badge>
+                    <Badge pill variant="warning">
+                      <h6>{this.props.genres.genreList.find(genre => genre.genreid === bookData.genreid).name}</h6>
+                    </Badge>
                   </div>
                   <div className='col-sm-0 mb-0 p-0 bd-highlight' style={{ marginLeft: '95vh' }}>
                     {bookData.available === 1 ? 

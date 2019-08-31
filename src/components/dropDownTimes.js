@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Dropdown} from 'react-bootstrap'
-import {getBookPublish} from '../publics/actions/books';
+import {getBookPublish} from '../publics/actions/books'
 
 class DropDownPublish extends React.Component{
   constructor(props){
@@ -12,8 +12,8 @@ class DropDownPublish extends React.Component{
     }
   }
   
-  goToYearPath = (year) =>{
-    this.state.history.push(`/home/year/${year}`)
+  goToYearPath = (year) => {
+    this.props.history.push(`/home/publish/${year}`)
   }
 
   componentDidMount = async () => {

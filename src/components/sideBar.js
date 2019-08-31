@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Container, Row, Button} from 'react-bootstrap'
+import {Container, Row, Button, Image} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getProfile} from '../publics/actions/users'
@@ -36,7 +36,7 @@ class sideBar extends Component {
   render(){
     return (
       <div>
-          <figure className="dashboard" src={this.state.image}/><hr/>
+          <Image className="dashboard" src={this.state.image}/><hr/>
           <h3 style={{textAlign:'center'}}>Hello ..</h3>
           <h4 style={{textAlign:'center'}}>{this.state.fullname}</h4><hr/>
           <Container className="sidebar-buttons ">

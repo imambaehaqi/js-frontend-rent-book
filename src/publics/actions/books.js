@@ -55,7 +55,7 @@ export const deleteBook = (bookid) => {
 export const editBook = (bookid, data) => {
     return{
         type: 'EDIT_BOOK',
-        payload: Axios.patch(`http://localhost:1150/books/${bookid}`, data,{
+        payload: Axios.patch(`http://localhost:1150/books/${bookid}`, data, {
             headers:{
                 Authorization: token
             }
@@ -66,7 +66,7 @@ export const editBook = (bookid, data) => {
 export const getBookPublish = () =>{
     return{
         type: 'GET_BOOKS_PUBLISH',
-        payload: Axios.get('http://localhost:1150/books/publish/',{
+        payload: Axios.get('http://localhost:1150/books/publish',{
             headers:{
                 Authorization: token
             }
@@ -74,7 +74,7 @@ export const getBookPublish = () =>{
     }
 }
 
-export const getBookPopular = () =>{
+export const getBookPopular = () => {
     return{
         type: 'GET_POPULAR_BOOKS',
         payload: Axios.get('http://localhost:1150/books/popular',{

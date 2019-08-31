@@ -37,11 +37,12 @@ class home extends React.Component {
       this.props.history.push('/')
       await this.props.dispatch(getProfile())
       this.setState({
-        userData: this.props.users.userProfile
+        userData: this.props.users.usersProfile
       })
   }
 
   render () {
+    console.log(this.props)
     return (
       <div>
         <Sidebar
@@ -58,7 +59,7 @@ class home extends React.Component {
             </Button>
             <DropDownGenre history={this.props.history}/>
             <DropDownTimes history={this.props.history}/>
-            <DropDownSortBy history={this.props.history}/>
+            {/* <DropDownSortBy history={this.props.history}/> */}
             <SearchBook history={this.props.history}/>
           </Nav>
           <Navbar.Brand href="/">
@@ -125,13 +126,21 @@ class home extends React.Component {
         <Route 
           path="/home/genre/:genre" 
           component={(url) => {
-            return <BooksList dataSource={`http://localhost:1150/books/genre/${url.match.params.genre}`}/>;
+            return (
+              <div className="p-5">
+                <BooksList dataSource={`http://localhost:1150/books/genre/${url.match.params.genre}`}/>
+              </div>
+            );
           }} 
         />
         <Route 
-          path="/home/year/:year" 
+          path="/home/publish/:publish" 
           component={(url) => {
-            return <BooksList dataSource={`http://localhost:1150/books/publish/${url.match.params.year}`}/>;
+            return (
+              <div className="p-5">
+                <BooksList dataSource={`http://localhost:1150/books/publish/${url.match.params.publish}`}/>
+              </div>
+            )
           }} 
         />
       </div>

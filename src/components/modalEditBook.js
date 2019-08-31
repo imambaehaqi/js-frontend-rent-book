@@ -33,7 +33,7 @@ class ModalEditBook extends React.Component{
             <FormEditBook 
               closeModal={()=>{this.setState({showModal:false})}} 
               history={this.props.history}
-              bookId={this.props.bookId}
+              bookId={this.props.bookid}
               bookData= {this.props.bookData}
               />
           </Modal.Body>

@@ -45,7 +45,7 @@ class FormAddBook extends React.Component{
 
     handleSubmit = async (event) => {
         await this.props.dispatch(addBook(this.state.formData))
-        console.log(this.props.book)
+        console.log(this.props.books)
         this.setState({
             showModal: true,
             modalTitle:"Success",
@@ -56,7 +56,7 @@ class FormAddBook extends React.Component{
 
     componentDidMount = async () => {
         await this.props.dispatch(getGenres())
-        this.setState ({genreList: this.props.genre.genresList})
+        this.setState ({genreList: this.props.genres.genreList})
     }
 
   render(){
@@ -104,8 +104,8 @@ class FormAddBook extends React.Component{
                 <Form.Label column sm="2">Genre</Form.Label>
                 <Col sm="10">
                 <Form.Control onChange={this.handleChange} as="select" name="genreid">
-                    {genreList.length !== 0 ? genreList.map((genres) => {
-                    return <option value={genres.genreid} key={genres.genreid}> {genres.name} </option>
+                    {genreList.length !== 0 ? genreList.map((genre) => {
+                    return <option value={genre.genreid} key={genre.genreid}> {genre.name} </option>
                     })
                     :<option>Loading...</option>
                 }

@@ -8,17 +8,19 @@ class DropDownGenre extends React.Component{
     super(props)
     this.state = {
       genreList: [],
-      history: props.history
+      history: props.history 
     }
   }
-
-  goToGenrePath = (genreName) =>{
+  goToGenrePath = (genreName) => {
+    console.log(genreName)
     this.state.history.push(`/home/genre/${genreName}/`)
   }
 
   componentDidMount = async () => {
-    await this.props.dispatch(getGenres())
-    this.setState ({genreList: this.props.genres.genreList})
+    if(this.props.genres.genreList.length === 0){
+      await this.props.dispatch(getGenres())
+      this.setState ({genreList: this.props.genres.genreList})
+    }
   }
 
   render() {

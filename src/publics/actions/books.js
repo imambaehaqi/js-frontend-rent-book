@@ -22,7 +22,7 @@ export const getBooks = (dataSource, page = 1, sortby, search) => {
 export const getBookById = (id) => {
     return {
         type: 'GET_BOOK_BY_ID',
-        payload: Axios.get(`http://${process.env.REACT_APP_BACKEND_HOST}/books/${id}`,{
+        payload: Axios.get(`https://calm-beach-21365.herokuapp.com/books/${id}`,{
             headers:{
                 Authorization: token
             }
@@ -33,7 +33,7 @@ export const getBookById = (id) => {
 export const addBook = (data) => {
     return {
         type: 'ADD_BOOK',
-        payload: Axios.post(`http://${process.env.REACT_APP_BACKEND_HOST}/books`, data, {
+        payload: Axios.post(`https://calm-beach-21365.herokuapp.com/books`, data, {
             headers:{
                 Authorization: token
             }
@@ -44,7 +44,7 @@ export const addBook = (data) => {
 export const deleteBook = (id) => {
     return {
         type: 'DELETE_BOOK',
-        payload: Axios.delete(`http://${process.env.REACT_APP_BACKEND_HOST}/books/${id}`,{
+        payload: Axios.delete(`https://calm-beach-21365.herokuapp.com/books/${id}`,{
             headers:{
                 Authorization: token
             }
@@ -55,7 +55,7 @@ export const deleteBook = (id) => {
 export const editBook = (id, data) => {
     return{
         type: 'EDIT_BOOK',
-        payload: Axios.patch(`http://${process.env.REACT_APP_BACKEND_HOST}/books/${id}`, data, {
+        payload: Axios.patch(`https://calm-beach-21365.herokuapp.com/books/${id}`, data, {
             headers:{
                 Authorization: token
             }
@@ -66,7 +66,7 @@ export const editBook = (id, data) => {
 export const getBookPublish = () =>{
     return{
         type: 'GET_BOOKS_PUBLISH',
-        payload: Axios.get(`http://${process.env.REACT_APP_BACKEND_HOST}/books/publish`,{
+        payload: Axios.get(`https://calm-beach-21365.herokuapp.com/books/publish`,{
             headers:{
                 Authorization: token
             }
@@ -77,7 +77,7 @@ export const getBookPublish = () =>{
 export const getBookPopular = () => {
     return{
         type: 'GET_POPULAR_BOOKS',
-        payload: Axios.get(`http://${process.env.REACT_APP_BACKEND_HOST}/books/popular`,{
+        payload: Axios.get(`https://calm-beach-21365.herokuapp.com/books/popular`,{
             headers:{
                 Authorization: token 
             }

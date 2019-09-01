@@ -3,7 +3,7 @@ import Axios from 'axios'
 export const getGenres = () => {
     return {
         type: 'GET_GENRES',
-        payload: Axios.get(`http://${process.env.REACT_APP_BACKEND_HOST}/genres`, {
+        payload: Axios.get(`https://calm-beach-21365.herokuapp.com/genres`, {
             headers:{
                 Authorization: window.localStorage.getItem("token")
             }
@@ -14,7 +14,7 @@ export const getGenres = () => {
 export const addGenre = (data) => {
     return {
         type: 'ADD_GENRE',
-        payload: Axios.post(`http://${process.env.REACT_APP_BACKEND_HOST}/genres`, data, {
+        payload: Axios.post(`https://calm-beach-21365.herokuapp.com/genres`, data, {
             headers:{
                 Authorization: window.localStorage.getItem("token")
             }
@@ -25,7 +25,7 @@ export const addGenre = (data) => {
 export const deleteGenre = (id) => {
     return {
         type: 'DELETE_GENRE',
-        payload: Axios.delete(`http://${process.env.REACT_APP_BACKEND_HOST}/genres/${id}`, {
+        payload: Axios.delete(`https://calm-beach-21365.herokuapp.com/genres/${id}`, {
             headers:{
                 Authorization: window.localStorage.getItem("token")
             }
@@ -36,7 +36,7 @@ export const deleteGenre = (id) => {
 export const editGenre = (id, data) => {
     return {
         type: 'EDIT_GENRE',
-        payload: Axios.patch(`http://${process.env.REACT_APP_BACKEND_HOST}/genres/${id}`, data, {
+        payload: Axios.patch(`https://calm-beach-21365.herokuapp.com/genres/${id}`, data, {
             headers:{
                 Authorization: window.localStorage.getItem("token")
             }

@@ -22,7 +22,7 @@ export const getBooks = (dataSource, page = 1, sortby, search) => {
 export const getBookById = (id) => {
     return {
         type: 'GET_BOOK_BY_ID',
-        payload: Axios.get(`http://localhost:1150/books/${id}`,{
+        payload: Axios.get(`http://${process.env.REACT_APP_BACKEND_HOST}/books/${id}`,{
             headers:{
                 Authorization: token
             }
@@ -33,7 +33,7 @@ export const getBookById = (id) => {
 export const addBook = (data) => {
     return {
         type: 'ADD_BOOK',
-        payload: Axios.post('http://localhost:1150/books', data, {
+        payload: Axios.post(`http://${process.env.REACT_APP_BACKEND_HOST}/books`, data, {
             headers:{
                 Authorization: token
             }
@@ -44,7 +44,7 @@ export const addBook = (data) => {
 export const deleteBook = (id) => {
     return {
         type: 'DELETE_BOOK',
-        payload: Axios.delete(`http://localhost:1150/books/${id}`,{
+        payload: Axios.delete(`http://${process.env.REACT_APP_BACKEND_HOST}/books/${id}`,{
             headers:{
                 Authorization: token
             }
@@ -55,7 +55,7 @@ export const deleteBook = (id) => {
 export const editBook = (id, data) => {
     return{
         type: 'EDIT_BOOK',
-        payload: Axios.patch(`http://localhost:1150/books/${id}`, data, {
+        payload: Axios.patch(`http://${process.env.REACT_APP_BACKEND_HOST}/books/${id}`, data, {
             headers:{
                 Authorization: token
             }
@@ -66,7 +66,7 @@ export const editBook = (id, data) => {
 export const getBookPublish = () =>{
     return{
         type: 'GET_BOOKS_PUBLISH',
-        payload: Axios.get('http://localhost:1150/books/publish',{
+        payload: Axios.get(`http://${process.env.REACT_APP_BACKEND_HOST}/books/publish`,{
             headers:{
                 Authorization: token
             }
@@ -77,9 +77,9 @@ export const getBookPublish = () =>{
 export const getBookPopular = () => {
     return{
         type: 'GET_POPULAR_BOOKS',
-        payload: Axios.get('http://localhost:1150/books/popular',{
+        payload: Axios.get(`http://${process.env.REACT_APP_BACKEND_HOST}/books/popular`,{
             headers:{
-                Authorization: token
+                Authorization: token 
             }
         })
     }

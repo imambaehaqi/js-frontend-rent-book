@@ -3,7 +3,7 @@ import Axios from 'axios'
 export const getGenres = () => {
     return {
         type: 'GET_GENRES',
-        payload: Axios.get('http://localhost:1150/genres', {
+        payload: Axios.get(`http://${process.env.REACT_APP_BACKEND_HOST}/genres`, {
             headers:{
                 Authorization: window.localStorage.getItem("token")
             }
@@ -14,7 +14,7 @@ export const getGenres = () => {
 export const addGenre = (data) => {
     return {
         type: 'ADD_GENRE',
-        payload: Axios.post('http://localhost:1150/genres', data, {
+        payload: Axios.post(`http://${process.env.REACT_APP_BACKEND_HOST}/genres`, data, {
             headers:{
                 Authorization: window.localStorage.getItem("token")
             }
@@ -25,7 +25,7 @@ export const addGenre = (data) => {
 export const deleteGenre = (id) => {
     return {
         type: 'DELETE_GENRE',
-        payload: Axios.delete(`http://localhost:1150/genres/${id}`, {
+        payload: Axios.delete(`http://${process.env.REACT_APP_BACKEND_HOST}/genres/${id}`, {
             headers:{
                 Authorization: window.localStorage.getItem("token")
             }
@@ -36,7 +36,7 @@ export const deleteGenre = (id) => {
 export const editGenre = (id, data) => {
     return {
         type: 'EDIT_GENRE',
-        payload: Axios.patch(`http://localhost:1150/genres/${id}`, data, {
+        payload: Axios.patch(`http://${process.env.REACT_APP_BACKEND_HOST}/genres/${id}`, data, {
             headers:{
                 Authorization: window.localStorage.getItem("token")
             }

@@ -22,36 +22,40 @@ class FormAddBook extends React.Component{
             modalMessage:"",
             history:props.history
         }
-        this.handleChange = this.handleChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
-        this.handleClose  = this.handleClose.bind(this)
     }
 
     handleClose = () => {
         this.setState({showModal: false})
     }
 
-    handleChange(event){
+    handleChange = (event) => {
         let newFormData = {...this.state.formData}
         const target = event.target
         const name = target.name
         const value = target.value
         newFormData[name] = value
         this.setState({
-            formData: newFormData
+          formData: newFormData
         })
         console.log(this.state.formData)
-    }
+      }
 
     handleSubmit = async (event) => {
+        event.preventDefault()
         await this.props.dispatch(addBook(this.state.formData))
-        console.log(this.props.books)
+        console.log(this.state.formData)
         this.setState({
             showModal: true,
             modalTitle:"Success",
             modalMessage:"Success Attachment Book"
         })
-        event.preventDefault()
+        .catch(() => {
+            this.setState({
+                showModal: true,
+                modalTitle: "Failed",
+                modalMessage: this.props.books.errMessage
+            })
+        })
     }
 
     componentDidMount = async () => {
@@ -60,6 +64,7 @@ class FormAddBook extends React.Component{
     }
 
   render(){
+    const today = new Date()
     const {genreList} = this.state
     return (
         <Fragment>

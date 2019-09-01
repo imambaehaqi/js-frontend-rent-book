@@ -32,11 +32,12 @@ class ModalAddBorrow extends React.Component{
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <FormAddBorrow bookId={this.props.bookId} closeModal={()=>{this.setState({showModal:false})}} history={this.props.history}/>
+            <FormAddBorrow bookId={this.props.bookid} closeModal={()=>{this.setState({showModal:false})}} history={this.props.history}/>
           </Modal.Body>
         </Modal>
       </Fragment>
     )
   }
 }
+
 export default ModalAddBorrow

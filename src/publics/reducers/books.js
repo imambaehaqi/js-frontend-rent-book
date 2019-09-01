@@ -53,42 +53,41 @@ const books = (state = initState, action) => {
                 isLoading:false,
                 isFulfilled:true
             }
-        case 'ADD_BOOKS_PENDING':
+        case 'ADD_BOOK_PENDING':
             return{
                 ...state,
                 isLoading:true,
                 isRejected:false,
                 isFulfilled:false
             }
-        case 'ADD_BOOKS_REJECTED':
+        case 'ADD_BOOK_REJECTED':
             return{
                 ...state,
                 isLoading:false,
-                isRejected:true,
-                errMessage:action.payload.response.data.message 
+                isRejected:true 
             }
-        case 'ADD_BOOKS_FULFILLED':
+        case 'ADD_BOOK_FULFILLED':
             state.booksList.unshift(action.payload.data.data)
             return{
                 ...state,
                 isLoading:false,
                 isFulfilled:true
             }
-        case 'EDIT_BOOKS_PENDING':
+        case 'EDIT_BOOK_PENDING':
             return{
                 ...state,
                 isLoading:true,
                 isRejected:false,
                 isFulfilled:false
             }
-        case 'EDIT_BOOKS_REJECTED':
+        case 'EDIT_BOOK_REJECTED':
             return{
                 ...state,
                 isLoading:false,
                 isRejected:true,
                 errMessage: action.payload.response.data.message
             }
-        case 'EDIT_BOOKS_FULFILLED':
+        case 'EDIT_BOOK_FULFILLED':
             const newBookData = action.payload.data.data[0]
             return{
                 ...state,

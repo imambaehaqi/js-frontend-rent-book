@@ -37,7 +37,6 @@ class sideBar extends Component {
     return (
       <div>
           <Image className="dashboard" src={this.state.image}/><hr/>
-          <h3 style={{textAlign:'center'}}>Hello ..</h3>
           <h4 style={{textAlign:'center'}}>{this.state.fullname}</h4><hr/>
           <Container className="sidebar-buttons ">
             <Row className="justify-content-md-left">
@@ -49,7 +48,7 @@ class sideBar extends Component {
               {
                   this.state.level === "admin" ? 
                   <Row className="justify-content-md-left">
-                    <ModalAddBook history={this.state.history}/>
+                    <ModalAddBook history={this.props.history}/>
                   </Row>
                   :''
               }

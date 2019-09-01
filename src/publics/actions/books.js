@@ -19,10 +19,10 @@ export const getBooks = (dataSource, page = 1, sortby, search) => {
     }
 }
 
-export const getBookById = (bookid) => {
+export const getBookById = (id) => {
     return {
         type: 'GET_BOOK_BY_ID',
-        payload: Axios.get(`http://localhost:1150/books/${bookid}`,{
+        payload: Axios.get(`http://localhost:1150/books/${id}`,{
             headers:{
                 Authorization: token
             }
@@ -41,10 +41,10 @@ export const addBook = (data) => {
     }
 }
 
-export const deleteBook = (bookid) => {
+export const deleteBook = (id) => {
     return {
         type: 'DELETE_BOOK',
-        payload: Axios.delete(`http://localhost:1150/books/${bookid}`,{
+        payload: Axios.delete(`http://localhost:1150/books/${id}`,{
             headers:{
                 Authorization: token
             }
@@ -52,10 +52,10 @@ export const deleteBook = (bookid) => {
     }
 }
 
-export const editBook = (bookid, data) => {
+export const editBook = (id, data) => {
     return{
         type: 'EDIT_BOOK',
-        payload: Axios.patch(`http://localhost:1150/books/${bookid}`, data, {
+        payload: Axios.patch(`http://localhost:1150/books/${id}`, data, {
             headers:{
                 Authorization: token
             }

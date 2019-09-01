@@ -42,7 +42,6 @@ class home extends React.Component {
   }
 
   render () {
-    console.log(this.props)
     return (
       <div>
         <Sidebar
@@ -59,7 +58,7 @@ class home extends React.Component {
             </Button>
             <DropDownGenre history={this.props.history}/>
             <DropDownTimes history={this.props.history}/>
-            {/* <DropDownSortBy history={this.props.history}/> */}
+            <DropDownSortBy history={this.props.history}/>
             <SearchBook history={this.props.history}/>
           </Nav>
           <Navbar.Brand href="/">

@@ -6,7 +6,7 @@ class ModalAddBook extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      showModal: false,
+      showModal: false
     }
   }
   
@@ -14,10 +14,10 @@ class ModalAddBook extends React.Component{
     return(
       <Fragment>
         <Button 
-          variant={this.props.variant || "light"} 
-          onClick={() => {this.setState({showModal:true})}}
-          style={{width:'100%'}}>
-          Add Book
+          variant={this.props.variant || "light"}
+          style={{width:'100%'}}
+          onClick={() => {this.setState({showModal:true})}}>
+          <b>* Add Book</b>
         </Button>
         <Modal
           show={this.state.showModal}
@@ -38,25 +38,5 @@ class ModalAddBook extends React.Component{
       </Fragment>
     )
   }
-}
-
-function ModalLayer(props) {
-  return (
-    <Modal
-      {...props}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          {props.title}
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        {props.content}
-      </Modal.Body>
-    </Modal>
-  );
 }
 export default ModalAddBook

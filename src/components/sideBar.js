@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Container, Row, Button, Image} from 'react-bootstrap'
+import {Container, Row, Image} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getProfile} from '../publics/actions/users'
@@ -37,6 +37,7 @@ class sideBar extends Component {
     return (
       <div>
           <Image className="dashboard" src={this.state.image}/><hr/>
+          <h5 style={{textAlign:'center'}}><h6>Card Number:</h6><b>CM-{this.state.userid}</b></h5>
           <h4 style={{textAlign:'center'}}>{this.state.fullname}</h4><hr/>
           <Container className="sidebar-buttons ">
             <Row className="justify-content-md-left">
@@ -53,7 +54,7 @@ class sideBar extends Component {
                   :''
               }
             <Row className="justify-content-md-left">
-                <Button style={{width:'100%'}} variant="light" onClick={this.handleLogout} >Logout</Button>
+                <Link style={{width:'100%'}} className="btn" variant="light" onClick={this.handleLogout} >Logout</Link>
             </Row>
           </Container>
       </div>

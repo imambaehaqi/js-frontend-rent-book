@@ -14,8 +14,8 @@ class FormAddBook extends React.Component{
                 title: '',
                 description:'',
                 image:'',
-                released:'',
-                genreid:''
+                released:new Date().toISOString().split('T')[0],
+                genreid:1
             },
             showModal:false,
             modalTitle:"",
@@ -63,66 +63,68 @@ class FormAddBook extends React.Component{
         this.setState ({genreList: this.props.genres.genreList})
     }
 
-  render(){
-    const today = new Date()
-    const {genreList} = this.state
+    render(){
+        const today = new Date()
+        const {genreList} = this.state
+
     return (
-        <Fragment>
-            <Form onSubmit={this.handleSubmit}>
-            <Form.Group as={Row} controlId="formPlaintextTitle">
-                <Form.Label column sm="2">
-                    Title
-                </Form.Label>
-                <Col sm="10">
-                <Form.Control onChange={this.handleChange} type="text" name="title" placeholder="Title..." />
-                </Col>
-            </Form.Group>
+      <Fragment>
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Group as={Row} controlId="formPlaintextTitle">
+            <Form.Label column sm="2">
+              Title
+            </Form.Label>
+            <Col sm="10">
+              <Form.Control onChange={this.handleChange} type="text" name="title" placeholder="Title..." required/>
+            </Col>
+          </Form.Group>
 
-            <Form.Group as={Row} controlId="formPlaintextDescription">
-                <Form.Label column sm="2">
-                    Description
-                </Form.Label>
-                <Col sm="10">
-                <Form.Control onChange={this.handleChange} type="text" name="description" placeholder="Description..." />
-                </Col>
-            </Form.Group>
+          <Form.Group as={Row} controlId="formPlaintextDescription">
+            <Form.Label column sm="2">
+                Description
+            </Form.Label>
+            <Col sm="10">
+              <Form.Control onChange={this.handleChange} type="text" name="description" placeholder="Description..." required/>
+            </Col>
+          </Form.Group>
 
-            <Form.Group as={Row} controlId="formPlaintextImageURL">
-                <Form.Label column sm="2">
-                    Image URL
-                </Form.Label>
-                <Col sm="10">
-                <Form.Control onChange={this.handleChange} type="text" name="image" placeholder="Image URL..." />
-                </Col>
-            </Form.Group>
+          <Form.Group as={Row} controlId="formPlaintextImageURL">
+            <Form.Label column sm="2">
+                Image URL
+            </Form.Label>
+            <Col sm="10">
+              <Form.Control onChange={this.handleChange} type="text" name="image" placeholder="Image URL..." required/>
+            </Col>
+          </Form.Group>
 
-            <Form.Group as={Row} controlId="formPlaintextDateReleased">
-                <Form.Label column sm="2">
-                    Date Released
-                </Form.Label>
-                <Col sm="10">
-                <Form.Control onChange={this.handleChange} name="released" type="date" />
-                </Col>
-            </Form.Group>
+          <Form.Group as={Row} controlId="formPlaintextDateReleased">
+            <Form.Label column sm="2">
+                Date Released
+            </Form.Label>
+            <Col sm="10">
+                <Form.Control onChange={this.handleChange} defaultValue={today.toISOString().split('T')[0]} required name="released" type="date" />
+            </Col>
+          </Form.Group>
 
-            <Form.Group as={Row} controlId="formPlaintextGenre">
-                <Form.Label column sm="2">Genre</Form.Label>
+          <Form.Group as={Row} controlId="formPlaintextGenre">
+            <Form.Label column sm="2">Genre</Form.Label>
                 <Col sm="10">
-                <Form.Control onChange={this.handleChange} as="select" name="genreid">
-                    {genreList.length !== 0 ? genreList.map((genre) => {
-                    return <option value={genre.genreid} key={genre.genreid}> {genre.name} </option>
-                    })
-                    :<option>Loading...</option>
-                }
-                </Form.Control>
+                    <Form.Control onChange={this.handleChange} as="select" name="genreid" required>
+                        <option>Select Genre</option>
+                        {genreList.length !== 0 ? genreList.map((genre) => {
+                            return <option value={genre.genreid} key={genre.genreid}> {genre.name} </option>
+                            })
+                            :<option>Loading...</option>
+                        }
+                    </Form.Control>
                 </Col>
-            </Form.Group>
+          </Form.Group>
 
-            <Button style={{float:"right"}} variant="warning" type="submit" className="btn-black">
-                    Save
-            </Button>
-            </Form>
-            <Modal show={this.state.showModal} onHide={this.handleClose}>
+          <Button style={{float:"right"}} variant="warning" type="submit" className="btn-black">
+            Save
+          </Button>
+        </Form>
+        <Modal show={this.state.showModal} onHide={this.handleClose}>
             <Modal.Header>
                 <Modal.Title>{this.state.modalTitle}</Modal.Title>
             </Modal.Header>
@@ -132,8 +134,8 @@ class FormAddBook extends React.Component{
                     Close
                 </Button>
             </Modal.Footer>
-            </Modal>
-        </Fragment>
+        </Modal>
+      </Fragment>
     );
   }
 }

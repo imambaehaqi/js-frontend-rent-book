@@ -1,8 +1,8 @@
 import React, {Fragment} from 'react'
 import {Modal, Button} from 'react-bootstrap'
-import FormEditBook from './formEditBook'
+import ReturnBookForm from './formReturnBook';
 
-class ModalEditBook extends React.Component{
+class ReturnBookModal extends React.Component{
   constructor(props){
     super(props)
     this.state = {
@@ -13,9 +13,11 @@ class ModalEditBook extends React.Component{
     return(
       <Fragment>
         <Button 
-          variant={this.props.variant || "warning"} 
+          className= {this.props.className}
+          variant={this.props.variant || "light"} 
+          size="lg"
           onClick={() => {this.setState({showModal:true})}}>
-          Edit Book
+          Return Book
         </Button>
         <Modal
           show={this.state.showModal}
@@ -26,21 +28,15 @@ class ModalEditBook extends React.Component{
         >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
-              Edit Book
+              Returning Book
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <FormEditBook 
-              closeModal={()=>{this.setState({showModal:false})}} 
-              history={this.props.history}
-              bookId={this.props.bookid}
-              bookData= {this.props.bookData}
-              />
+            <ReturnBookForm bookId={this.props.bookId} closeModal={()=>{this.setState({showModal:false})}} readOnly={this.props.readOnlyBookId} history={this.props.history}/>
           </Modal.Body>
         </Modal>
       </Fragment>
     )
   }
 }
-
-export default ModalEditBook
+export default ReturnBookModal

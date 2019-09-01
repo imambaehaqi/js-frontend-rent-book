@@ -1,7 +1,7 @@
 import React from 'react'
 import {Dropdown} from 'react-bootstrap'
 
-const sort =(props, sort) =>{
+const sort =(props, sort) => {
   props.history.push("?sortby="+sort)
 }
 

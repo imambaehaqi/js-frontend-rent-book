@@ -84,3 +84,10 @@ export const getBookPopular = () => {
         })
     }
 }
+
+export const setAvailability = (bookid,available) => {
+    return {
+      type:'SET_BOOK_AVAILABLE',
+      payload: {bookid,available}
+    }
+  }

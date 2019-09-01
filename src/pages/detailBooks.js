@@ -10,6 +10,8 @@ import {Alert, Modal, Button, Badge} from 'react-bootstrap'
 import ModalEditBook from '../components/modalEditBook'
 import ModalAddBorrow from '../components/modalAddBorrow'
 import {Link} from 'react-router-dom'
+import ModalReturnBook from '../components/modalReturnBook'
+import deleteBookPrompt from '../components/deleteBookPrompt'
 
 class detailBooks extends Component {
   constructor(props){
@@ -156,8 +158,8 @@ class detailBooks extends Component {
                   {this.state.userData.level === 'admin' ? 
                     <div className='d-flex align-items-end flex-column bd-highlight mb-3' style={{ height: '200px' }}>
                       <div className='p-2 bd-highlight' style={{ marginTop: '-25px' }}>
-                        <ModalEditBook/><a>&nbsp;</a>
-                        <Button variant="warning" onClick={this.handleDelete}>Delete</Button>
+                        <ModalEditBook history={this.props.history} bookid={bookData.bookid} bookData={bookData}/>
+                        <deleteBookPrompt bookData={bookData} history={this.props.history}/>
                       </div>
                     </div>
                   :''}
@@ -206,11 +208,10 @@ class detailBooks extends Component {
                   <div class='col-4 col-md-8'>
                     {this.state.userData.level === 'admin' ? 
                       bookData.available === 1 ?
-                      <ModalAddBorrow bookId={bookData.bookid} variant="warning" />
+                      <ModalAddBorrow bookid={bookData.bookid} variant="warning" />
                       :
-                      <button type='button' class='btn btn-warning' onClick={this.handleReturn}>
-                        <h4>Return</h4>
-                      </button> :''}
+                      <ModalReturnBook  bookid={bookData.bookid} className="borrow-button" variant="warning" readOnlyBookId={true}/>
+                      :''}
                   </div>
                 </div>
               </div>

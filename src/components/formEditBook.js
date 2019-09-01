@@ -1,4 +1,3 @@
-
 import React, {Fragment} from 'react'
 import {connect} from 'react-redux'
 
@@ -14,11 +13,11 @@ class FormEditBook extends React.Component{
             genreList:[],
             bookid: props.bookid,
             formData:{
-                image: props.image,
                 title: props.title,
-                genreid: props.genreid,
                 description: props.description,
-                released: props.released
+                image: props.image,
+                released: props.released,
+                genreid: props.genreid
             },
             showModal:false,
             modalTitle:"",
@@ -103,10 +102,10 @@ class FormEditBook extends React.Component{
                 <Form.Group as={Row} controlId="formPlaintextGenre">
                     <Form.Label column sm="2">Genre</Form.Label>
                     <Col sm="10">
-                    <Form.Control onChange={this.handleChange} as="select" name="genre">
+                    <Form.Control onChange={this.handleChange} as="select" name="genreid">
                         {genreList.length !== 0 ? genreList.map((genre) => {
-                        const selected = this.state.genreid === genre.id 
-                        return <option selected={selected} value={genre.id} key={genre.id}> {genre.name} </option>
+                        const selected = this.state.genreid === genre.genreid 
+                        return <option selected={selected} value={genre.genreid} key={genre.genreid}> {genre.name} </option>
                         })
                         :<option>Loading...</option>
                     }
@@ -133,6 +132,7 @@ class FormEditBook extends React.Component{
     );
   }
 }
+
 const mapStateToProps = (state) => {
   return{
     books: state.books,

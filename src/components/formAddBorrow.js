@@ -1,27 +1,30 @@
-import React,{Fragment} from 'react';
-import {Row, Col, Form, Button, Modal} from 'react-bootstrap';
-import {connect} from 'react-redux';
+import React,{Fragment} from 'react'
+import {Row, Col, Form, Button, Modal} from 'react-bootstrap'
+import {connect} from 'react-redux'
 
-import {borrowBook} from '../publics/actions/borrows';
+import {borrowBook, getHistoryBorrow} from '../publics/actions/borrows'
+import {setAvailability} from '../publics/actions/books'
 
-class FormEditBook extends React.Component{
+class FormAddBorrow extends React.Component{
   constructor(props){
     super(props)
     this.state = {
       formData:{
-        user_id: undefined,
-        book_id: props.bookId
+        userid: undefined,
+        bookid: props.bookid
       },
       showModal:false,
       modalTitle:"",
       modalMessage:"",
-      history:props.history,
+      history:props.history
     }
   }
 
   handleClose = ()=>{
-    this.setState({showModal: false})
     this.props.closeModal()
+    this.setState({showModal: false})
+    if(this.state.modalTitle !== "Failed")
+      this.props.dispatch(setAvailability(this.state.formData.bookid, 0))
   }
 
   handleChange = (event) => {
@@ -39,11 +42,17 @@ class FormEditBook extends React.Component{
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.dispatch(borrowBook(this.state.formData))
-      .then(()=>{
+      .then((res)=>{
+        console.log(res)
+        const borrowed_at = res.value.data.data.borrowed_at
+        const borrowingDate = new Date(borrowed_at)
+        let expirationDate = new Date()
+        expirationDate.setTime(borrowingDate.getTime() + (1000*60*60*24*7))
+        this.props.dispatch(getHistoryBorrow())
         this.setState({
           showModal: true,
           modalTitle:"Success",
-          modalMessage:"Success Borrowing Book",
+          modalMessage:`Success Borrowing Book! Please return it before ${expirationDate.toDateString()}`,
         })
       })
       .catch(() => {
@@ -54,6 +63,7 @@ class FormEditBook extends React.Component{
         })
       })
   }
+
   render(){
     return (
       <Fragment>
@@ -63,7 +73,7 @@ class FormEditBook extends React.Component{
               User ID
             </Form.Label>
             <Col sm="10">
-              <Form.Control onChange={this.handleChange} type="text" name="user_id" placeholder="User ID..." />
+              <Form.Control onChange={this.handleChange} type="text" name="userid" placeholder="User ID..." />
             </Col>
           </Form.Group>
 
@@ -72,7 +82,7 @@ class FormEditBook extends React.Component{
             Book ID
             </Form.Label>
             <Col sm="10">
-              <Form.Control onChange={this.handleChange} value={this.props.bookId} type="text" name="book_id" placeholder="Book ID..." />
+              <Form.Control onChange={this.handleChange} value={this.props.bookId} type="text" name="bookid" placeholder="Book ID..." />
             </Col>
           </Form.Group>
 
@@ -92,9 +102,10 @@ class FormEditBook extends React.Component{
           </Modal.Footer>
         </Modal>
       </Fragment>
-    );
+    )
   }
 }
+
 const mapStateToProps = state => {
   return{
     books: state.books,
@@ -102,4 +113,5 @@ const mapStateToProps = state => {
     borrows: state.borrows
   }
 }
-export default connect(mapStateToProps)(FormEditBook)
+
+export default connect(mapStateToProps)(FormAddBorrow)

@@ -22,13 +22,25 @@ export const returnBook = (data) => {
     }
 }
 
-export const getLatestBorrowBook = (borrowid) => {
+export const getLatestBorrowBook = (id) => {
     return{
         type: 'GET_LATEST_BOOK_BORROW',
-        payload: Axios.get(`http://localhost:1150/borrows/book/${borrowid}`,{
+        payload: Axios.get(`http://localhost:1150/borrows/book/${id}`,{
             headers:{
                 Authorization: window.localStorage.getItem("token")
             }
         })
     }
 }
+
+export const getHistoryBorrow = () => {
+    return {
+      type:'GET_BORROW_HISTORY',
+      payload: Axios.get(`https://localhost:1150/borrows/history`,{
+          headers:{
+            Authorization : window.localStorage.getItem("token")
+          }
+        }
+      )
+    }
+  }

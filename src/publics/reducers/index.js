@@ -1,15 +1,23 @@
 import {combineReducers} from 'redux'
 
-import books from './books'
-import genres from './genres'
-import users from './users'
-import borrows from './borrows'
+import book from './books';
+import genre from './genres';
+import user from './users';
+import borrowing from './borrows';
 
-const rootReducers = combineReducers({
-    borrows,
-    users,
-    genres,
-    books
+const appReducer = combineReducers({
+  borrowing,
+  user,
+  genre,
+  book,
 })
 
-export default rootReducers
+const rootReducer = (state, action) => {
+  if (action.type === 'USER_LOGOUT') {
+    state = undefined
+  }
+
+  return appReducer(state, action)
+}
+
+export default rootReducer

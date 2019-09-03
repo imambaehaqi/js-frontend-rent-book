@@ -1,45 +1,47 @@
 import Axios from 'axios'
 
 export const getGenres = () => {
-    return {
-        type: 'GET_GENRES',
-        payload: Axios.get(`https://calm-beach-21365.herokuapp.com/genres`, {
-            headers:{
-                Authorization: window.localStorage.getItem("token")
-            }
-        })
-    }
+  return {
+    type:'GET_GENRES',
+    payload: Axios.get(`http://localhost:1708/genres`,{
+        headers:{
+          Authorization : window.localStorage.getItem("token")
+        }
+      }
+    )
+  }
 }
 
 export const addGenre = (data) => {
-    return {
-        type: 'ADD_GENRE',
-        payload: Axios.post(`https://calm-beach-21365.herokuapp.com/genres`, data, {
-            headers:{
-                Authorization: window.localStorage.getItem("token")
-            }
-        })
-    }
+  return {
+    type:'ADD_GENRES',
+    payload: Axios.post(`http://localhost:1708/genres`, data, {
+        headers:{
+          Authorization : window.localStorage.getItem("token")
+        }
+      }
+    )
+  }
 }
-
 export const deleteGenre = (id) => {
-    return {
-        type: 'DELETE_GENRE',
-        payload: Axios.delete(`https://calm-beach-21365.herokuapp.com/genres/${id}`, {
-            headers:{
-                Authorization: window.localStorage.getItem("token")
-            }
-        })
-    }
+  return {
+    type:'DELETE_GENRES',
+    payload: Axios.delete(`http://localhost:1708/genres/${id}`,{
+        headers:{
+          Authorization : window.localStorage.getItem("token")
+        }
+      }
+    )
+  }
 }
-
 export const editGenre = (id, data) => {
-    return {
-        type: 'EDIT_GENRE',
-        payload: Axios.patch(`https://calm-beach-21365.herokuapp.com/genres/${id}`, data, {
-            headers:{
-                Authorization: window.localStorage.getItem("token")
-            }
-        })
-    }
+  return {
+    type:'EDIT_GENRES',
+    payload: Axios.patch(`http://localhost:1708/genres/${id}`, data,{
+        headers:{
+          Authorization : window.localStorage.getItem("token")
+        }
+      }
+    )
+  }
 }

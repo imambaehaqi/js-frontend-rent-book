@@ -1,47 +1,42 @@
-import React, { Component } from 'react'
-import { Card, Badge } from 'react-bootstrap'
+import React from 'react'
+import { Card, Badge } from "react-bootstrap"
 import { Redirect } from 'react-router-dom'
 
-import {connect} from 'react-redux'
-
-class BookCard extends Component {
+class BookCard extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      image : props.image,
-      bookid: props.bookid,
+      imgUrl : props.imgUrl,
+      bookId: props.bookId,
       title : props.title,
       description : props.description,
-      available : props.available,
-      genreid : props.genreid,
-      redirectToDetails:false
+      availability : props.availability,
+      genre : props.genre,
+      redirectToDetails:false,
     }
-    this.redirectToDetails = this.redirectToDetails.bind(this)
   }
 
-  redirectToDetails = () => {
+  redirectToDetails = () =>{
     this.setState({redirectToDetails:true})
   }
-
-  render () {
+  render(){
     if (this.state.redirectToDetails)
-      return <Redirect to={`/book/${this.state.bookid}`}/>
+      return <Redirect to={`/book/${this.state.bookId}`}/>
     const {description} = this.state
-    return (
-      <Card className='card shadow-lg'
-        onClick={() => this.redirectToDetails()}
-        >
+    return(
+      <Card 
+        style={{ width: '25%',cursor:"pointer", margin: '3%'}} 
+        onClick={() => {this.redirectToDetails()}}
+      >
         <figure>
-          <Card.Img variant='top' src={this.state.image} />
-            {this.state.available === 1 ? 
-            <Badge variant="warning" className="availability-badge">Available</Badge>
-            : 
-            <Badge variant="danger" className="availability-badge">Unavailable</Badge>}
+          <Card.Img variant="top" src={this.state.imgUrl} className="book-image"/>
+          {this.state.availability === 1 ? <Badge variant="warning" className="availability-badge">Available</Badge>: <Badge variant="danger" className="availability-badge">Unavailable</Badge>}
         </figure>
         <Card.Body>
           <Card.Title>{this.state.title}</Card.Title>
+          <Badge variant="warning">{this.state.genre}</Badge>
           <Card.Text>
-            {description.length > 30 ?  description.substr(0,75)+'...': description}
+            {description.length > 75 ?  description.substr(0,75)+'...': description}
           </Card.Text>
         </Card.Body>
       </Card>
@@ -49,9 +44,4 @@ class BookCard extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return{
-    users: state.users
-  }
-}
-export default connect(mapStateToProps)(BookCard)
+export default BookCard

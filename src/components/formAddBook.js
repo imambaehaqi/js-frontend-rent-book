@@ -1,72 +1,72 @@
-import React,{Fragment} from 'react'
-import {Row, Col, Form, Button, Modal} from 'react-bootstrap'
-import {connect} from 'react-redux'
+import React,{Fragment} from 'react';
+import {Row, Col, Form, Button, Modal} from 'react-bootstrap';
+import {connect} from 'react-redux';
 
-import {addBook} from '../publics/actions/books'
-import {getGenres} from '../publics/actions/genres'
+import {addBook} from '../publics/actions/books';
+import {getGenres} from '../publics/actions/genres';
 
-class FormAddBook extends React.Component{
-    constructor(props){
-        super(props)
-        this.state = {
-            genreList:[],
-            formData:{
-                title: '',
-                description:'',
-                image:'',
-                released:new Date().toISOString().split('T')[0],
-                genreid:1
-            },
-            showModal:false,
-            modalTitle:"",
-            modalMessage:"",
-            history:props.history
-        }
+class AddBookForm extends React.Component{
+  constructor(props){
+    super(props)
+    this.state = {
+      genreList:[],
+      formData:{
+        title: '',
+        description:'',
+        image:'',
+        date_released:new Date().toISOString().split('T')[0],
+        genre_id:1,
+      },
+      showModal:false,
+      modalTitle:"",
+      modalMessage:"",
+      history:props.history,
     }
+  }
 
-    handleClose = () => {
-        this.setState({showModal: false})
-    }
+  handleClose = () => {
+    this.setState({showModal: false})
+    this.props.closeModal()
+  }
 
-    handleChange = (event) => {
-        let newFormData = {...this.state.formData}
-        const target = event.target
-        const name = target.name
-        const value = target.value
-        newFormData[name] = value
+  handleChange = (event) => {
+    let newFormData = {...this.state.formData}
+    const target = event.target
+    const name = target.name
+    const value = target.value
+    newFormData[name] = value
+    this.setState({
+      formData: newFormData
+    })
+    console.log(this.state.formData)
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.props.dispatch(addBook(this.state.formData))
+      .then(()=>{
         this.setState({
-          formData: newFormData
+          showModal: true,
+          modalTitle:"Success",
+          modalMessage:"Success Adding Book",
         })
-        console.log(this.state.formData)
-      }
-
-    handleSubmit = async (event) => {
-        event.preventDefault()
-        await this.props.dispatch(addBook(this.state.formData))
-        console.log(this.state.formData)
+      })
+      .catch(() => {
         this.setState({
-            showModal: true,
-            modalTitle:"Success",
-            modalMessage:"Success Attachment Book"
+          showModal:true,
+          modalTitle:"Failed",
+          modalMessage:this.props.book.errMessage
         })
-        .catch(() => {
-            this.setState({
-                showModal: true,
-                modalTitle: "Failed",
-                modalMessage: this.props.books.errMessage
-            })
-        })
-    }
+      })
+  }
 
-    componentDidMount = async () => {
-        await this.props.dispatch(getGenres())
-        this.setState ({genreList: this.props.genres.genreList})
-    }
-
-    render(){
-        const today = new Date()
-        const {genreList} = this.state
-
+  componentDidMount = async () => {
+    await this.props.dispatch(getGenres())
+    this.setState ({genreList: this.props.genre.genresList})
+  };
+  render(){
+    const today = new Date()
+    const {genreList} = this.state
     return (
       <Fragment>
         <Form onSubmit={this.handleSubmit}>
@@ -81,7 +81,7 @@ class FormAddBook extends React.Component{
 
           <Form.Group as={Row} controlId="formPlaintextDescription">
             <Form.Label column sm="2">
-                Description
+            Description
             </Form.Label>
             <Col sm="10">
               <Form.Control onChange={this.handleChange} type="text" name="description" placeholder="Description..." required/>
@@ -90,7 +90,7 @@ class FormAddBook extends React.Component{
 
           <Form.Group as={Row} controlId="formPlaintextImageURL">
             <Form.Label column sm="2">
-                Image URL
+            Image URL
             </Form.Label>
             <Col sm="10">
               <Form.Control onChange={this.handleChange} type="text" name="image" placeholder="Image URL..." required/>
@@ -99,25 +99,25 @@ class FormAddBook extends React.Component{
 
           <Form.Group as={Row} controlId="formPlaintextDateReleased">
             <Form.Label column sm="2">
-                Date Released
+            Date Released
             </Form.Label>
             <Col sm="10">
-                <Form.Control onChange={this.handleChange} defaultValue={today.toISOString().split('T')[0]} required name="released" type="date" />
+              <Form.Control onChange={this.handleChange} defaultValue={today.toISOString().split('T')[0]} required name="date_released" type="date" />
             </Col>
           </Form.Group>
 
           <Form.Group as={Row} controlId="formPlaintextGenre">
             <Form.Label column sm="2">Genre</Form.Label>
-                <Col sm="10">
-                    <Form.Control onChange={this.handleChange} as="select" name="genreid" required>
-                        <option>Select Genre</option>
-                        {genreList.length !== 0 ? genreList.map((genre) => {
-                            return <option value={genre.genreid} key={genre.genreid}> {genre.name} </option>
-                            })
-                            :<option>Loading...</option>
-                        }
-                    </Form.Control>
-                </Col>
+            <Col sm="10">
+              <Form.Control onChange={this.handleChange} as="select" name="genre_id" required>
+                <option>Select Genre</option>
+                {genreList.length !== 0 ? genreList.map((genre) => {
+                  return <option value={genre.id} key={genre.id}> {genre.name} </option>
+                })
+                :<option>Loading...</option>
+              }
+              </Form.Control>
+            </Col>
           </Form.Group>
 
           <Button style={{float:"right"}} variant="warning" type="submit" className="btn-black">
@@ -125,26 +125,24 @@ class FormAddBook extends React.Component{
           </Button>
         </Form>
         <Modal show={this.state.showModal} onHide={this.handleClose}>
-            <Modal.Header>
-                <Modal.Title>{this.state.modalTitle}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>{this.state.modalMessage}</Modal.Body>
-            <Modal.Footer>
-                <Button variant="secondary" onClick={this.handleClose}>
-                    Close
-                </Button>
-            </Modal.Footer>
+          <Modal.Header>
+            <Modal.Title>{this.state.modalTitle}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>{this.state.modalMessage}</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={this.handleClose}>
+              Close
+            </Button>
+          </Modal.Footer>
         </Modal>
       </Fragment>
     );
   }
 }
-
 const mapStateToProps = state => {
   return{
-    books: state.books,
-    genres: state.genres
+    book: state.book,
+    genre: state.genre
   }
 }
-
-export default connect(mapStateToProps)(FormAddBook)
+export default connect(mapStateToProps)(AddBookForm)

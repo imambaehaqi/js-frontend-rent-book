@@ -50,7 +50,7 @@ class formLogin extends React.Component {
       this.setState({
         showModal:true,
         modalTitle:"Failed",
-        modalMessage:this.props.user.errMessage
+        modalMessage:this.props.users.errMessage
       })
     })
   }

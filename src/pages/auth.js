@@ -6,7 +6,7 @@ import { Image } from 'react-bootstrap'
 import FormLogin from '../components/formLogin'
 import FormRegister from '../components/formRegister'
 
-class auth extends Component {
+class Auth extends Component {
   constructor(props){
     super(props)
     this.state = {
@@ -70,4 +70,4 @@ class auth extends Component {
   }
 }
 
-export default auth
+export default Auth

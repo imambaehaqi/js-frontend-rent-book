@@ -1,69 +1,71 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { Route } from 'react-router-dom'
-import { Navbar, Nav, Button, Image } from 'react-bootstrap'
 import Sidebar from 'react-sidebar'
-
-import CarouselBooks from '../components/carouselBooks'
-import BooksList from '../components/bookList'
-import DropDownGenre from '../components/dropDownGenre'
-import DropDownTimes from '../components/dropDownTimes'
-import DropDownSortBy from '../components/dropDownSort'
-import SideBarUser from '../components/sideBar'
-import { SearchBook } from '../components/searchBooks'
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Route } from 'react-router-dom';
+import {connect} from 'react-redux';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
+import {Button, Navbar} from 'react-bootstrap'
 
-import { getProfile } from '../publics/actions/users'
+import BooksList from '../components/bookList'
+import UserSideBar from '../components/sideBar'
+import Bookshelf from '../bookshelf.svg'
+import GenreDropdown from "../components/dropDownGenre"
+import YearDropdown from '../components/dropDownTimes'
+import PopularBooksCarousel from '../components/carouselBooks'
+import SortByDropdown from '../components/dropDownSort'
+import {SearchBook} from '../components/searchBooks'
+import {getProfile} from '../publics/actions/users'
+import AvailabilityDropdown from '../components/dropDownAvailable'
+import HistoryTable from '../components/historyBorrow'
 
-class home extends React.Component {
-  constructor (props) {
+class Home extends React.Component{
+  constructor(props){
     super(props)
     this.state = {
-      sidebarOpen: false,
+      sidebarOpen : false,
       search:"",
-      userData:undefined
+      userData:undefined,
     }
     this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this)
+    
   }
-
-  onSetSidebarOpen (open) {
-    this.setState({ sidebarOpen: open })
+  onSetSidebarOpen = (open) => {
+    this.setState({
+      sidebarOpen : open
+    })
   }
-
-  componentDidMount = async () => {
+  componentDidMount= () => {
     if(window.localStorage.getItem("token") === null)
       this.props.history.push('/')
-      await this.props.dispatch(getProfile())
-      this.setState({
-        userData: this.props.users.usersProfile
-      })
+    if(!this.props.user.userProfile)
+      this.props.dispatch(getProfile())
   }
 
-  render () {
-    return (
+  render(){
+    return(
       <div>
         <Sidebar
-          sidebar={<SideBarUser
-            history={this.props.history}
-          />}
+          children={''}
+          sidebar={
+            <UserSideBar
+              history={this.props.history}
+            />}
           open={this.state.sidebarOpen}
           onSetOpen={this.onSetSidebarOpen}
-          styles={{ sidebar: { background: 'white', zIndex: '20', width: '20%', position: 'fixed' } }} />
-        <Navbar bg='light' variant='light' className='shadow' fixed='top'>
-          <Nav className='mr-auto'>
-            <Button variant='light' onClick={() => this.onSetSidebarOpen(true)}>
-              <FontAwesomeIcon icon={faBars} />
-            </Button>
-            <DropDownGenre history={this.props.history}/>
-            <DropDownTimes history={this.props.history}/>
-            <DropDownSortBy history={this.props.history}/>
-            <SearchBook history={this.props.history}/>
-          </Nav>
-          <Navbar.Brand href="/">
-            <Image src={require('../bookshelf.svg')} style={{width:'50px', height:'50px'}}/>
-            <b>Book's</b>
+          styles={{ sidebar: { background: "white", zIndex:"20", position:"fixed" } }}
+        >
+        </Sidebar>
+        <Navbar className="bg-light justify-content-between shadow-lg">
+          <Button variant="light" onClick={() => this.onSetSidebarOpen(true)}>
+            <FontAwesomeIcon icon={faBars}/>
+          </Button>
+          <GenreDropdown history={this.props.history}/>
+          <YearDropdown history={this.props.history}/>
+          <SortByDropdown history={this.props.history}/>
+          <AvailabilityDropdown history={this.props.history} />
+          <SearchBook history={this.props.history}/>
+          <Navbar.Brand onClick={()=>{this.props.history.push("/home")}}>
+            <img src={Bookshelf} alt="bookshelf" style={{width:'50px'}}/><b>Book's</b>
           </Navbar.Brand>
         </Navbar>
         <Route 
@@ -72,15 +74,14 @@ class home extends React.Component {
           render={({history}) => {
             let params = new URLSearchParams(window.location.search)
             return(
-              <div className="container md-5">
-                <CarouselBooks history={history}/><hr/>
-                <h1>List Book's</h1><hr/>
+              <div>
+                <PopularBooksCarousel history={history}/>
                 <BooksList 
-                  available={params.get("available")} 
+                  availability={params.get("availability")}
                   history={history} 
                   sortby={params.get("sortby")} 
                   search={params.get("search")} 
-                  dataSource={`http://localhost:1150/books`} 
+                  dataSource={`http://localhost:1708/books`} 
                   key={window.location.href + this.state} />
               </div>
             );
@@ -92,13 +93,13 @@ class home extends React.Component {
           render={({history}) => {
             let params = new URLSearchParams(window.location.search)
             return(
-              <div className="p-5">
+              <div>
                 <BooksList
-                  available={params.get("available")} 
+                  availability={params.get("availability")} 
                   history={history}
                   sortby={params.get("sortby")} 
                   search={params.get("search")} 
-                  dataSource={`http://localhost:1150/books`} 
+                  dataSource={`http://localhost:1708/books`} 
                   key={window.location.href} />
               </div>
             );
@@ -107,11 +108,11 @@ class home extends React.Component {
         <Route 
           path="/home/history" 
           exact={true}
-          render={() => {
-            if(this.state.userData !== undefined )
+          render={({history}) => {
+            if(this.props.user.userProfile.id !== undefined )
               return(
                 <div>
-                  <BooksList dataSource={`http://localhost:1150/borrows/history/${this.state.userData.userid}`}/>
+                  <HistoryTable history={history} />
                 </div>
               );
             else 
@@ -125,32 +126,22 @@ class home extends React.Component {
         <Route 
           path="/home/genre/:genre" 
           component={(url) => {
-            return (
-              <div className="p-5">
-                <BooksList dataSource={`http://localhost:1150/books/genre/${url.match.params.genre}`}/>
-              </div>
-            );
+            return <BooksList dataSource={`http://localhost:1708/books/genre/${url.match.params.genre}`}/>;
           }} 
         />
         <Route 
-          path="/home/publish/:publish" 
+          path="/home/year/:year" 
           component={(url) => {
-            return (
-              <div className="p-5">
-                <BooksList dataSource={`http://localhost:1150/books/publish/${url.match.params.publish}`}/>
-              </div>
-            )
+            return <BooksList dataSource={`http://localhost:1708/books/year/${url.match.params.year}`}/>;
           }} 
         />
       </div>
     )
   }
 }
-
 const mapStateToProps = (state) => {
   return{
-    users: state.users,
+    user: state.user,
   }
 }
-
-export default connect(mapStateToProps)(home)
+export default connect(mapStateToProps)(Home)

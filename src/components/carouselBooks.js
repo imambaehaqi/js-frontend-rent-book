@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 
-import {getBookPopular} from '../publics/actions/books'
+import {getNewestBooks} from '../publics/actions/books'
 
 import { Carousel, Image } from 'react-bootstrap'
 
@@ -14,29 +14,29 @@ class carouselBooks extends Component {
     this.getDetails = this.getDetails.bind(this)
   }
 
-  getDetails = (bookid) => {
-    this.props.history.push(`/book/${bookid}`)
+  getDetails = (id) => {
+    this.props.history.push(`/book/${id}`)
   }
 
   componentDidMount = async () => {
-    await this.props.dispatch(getBookPopular())
-    this.setState ({popularBooksList: this.props.books.popularBooksList})
+    await this.props.dispatch(getNewestBooks())
+    this.setState ({popularBooksList: this.props.book.popularBooksList})
   }
 
   render () {
     const {popularBooksList} = this.state
     return (
-      <Carousel style={{ marginTop: '100px' }}>
-        {popularBooksList !== null ? popularBooksList.map((books, index) => {
+      <Carousel style={{ marginTop: '30px' }}>
+        {popularBooksList !== null ? popularBooksList.map((book, index) => {
           return (
-            <Carousel.Item key={index} onClick={()=>this.getDetails(books.bookid)}>
+            <Carousel.Item className='shadow-lg' key={index} onClick={()=>this.getDetails(book.id)}>
               <Image
-                style={{height:'400px'}}
-                className='w-50 align-item-center shadow-lg mb-5'
-                src={books.image}
+                style={{height:'70vh', width:'90vh'}}
+                className='align-item-center shadow-lg mb-5'
+                src={book.image}
               />
             <Carousel.Caption className="shadow-lg" style={{backgroundColor:'black'}}>
-              <h4>{books.title}</h4>
+              <h4>{book.title}</h4>
             </Carousel.Caption>
           </Carousel.Item>
           )
@@ -48,7 +48,7 @@ class carouselBooks extends Component {
 
 const mapStateToProps = state => {
   return{
-    books: state.books
+    book: state.book
   }
 }
 

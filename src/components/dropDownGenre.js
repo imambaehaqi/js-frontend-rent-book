@@ -1,39 +1,38 @@
 import React from 'react'
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
 import {Dropdown} from 'react-bootstrap'
-import {getGenres} from '../publics/actions/genres'
+import {getBookGenres} from '../publics/actions/books'
 
-class DropDownGenre extends React.Component{
+class GenreDropdown extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      genreList: [],
-      history: props.history 
+      bookGenresList: [],
+      history: props.history,
     }
   }
-  goToGenrePath = (genreName) => {
-    console.log(genreName)
+
+  goToGenrePath = (genreName) =>{
     this.state.history.push(`/home/genre/${genreName}/`)
   }
 
   componentDidMount = async () => {
-    if(this.props.genres.genreList.length === 0){
-      await this.props.dispatch(getGenres())
-      this.setState ({genreList: this.props.genres.genreList})
+    if(this.props.book.bookGenresList.length === 0){
+      await this.props.dispatch(getBookGenres())
+      this.setState ({bookGenresList: this.props.book.bookGenresList})
     }
-  }
-
+  };
   render() {
-    const {genreList} = this.state
+    const {bookGenresList} = this.props.book
     return(
       <Dropdown>
         <Dropdown.Toggle variant="light" id="dropdown-basic">
-          All Categories
+          <b>All Categories</b>
         </Dropdown.Toggle>
         <Dropdown.Menu>
-          {genreList.length > 0 ? 
-            genreList.map((genre) => {
-              return <Dropdown.Item key={genre.name} onClick={()=>{this.goToGenrePath(genre.name)}}>{genre.name}</Dropdown.Item>
+          {bookGenresList.length > 0 ? 
+            bookGenresList.map((genre) => {
+              return <Dropdown.Item key={genre.genre} onClick={()=>{this.goToGenrePath(genre.genre)}}>{genre.genre}</Dropdown.Item>
             }):
             <Dropdown.Item href="#">Loading...</Dropdown.Item>}
         </Dropdown.Menu>
@@ -41,11 +40,9 @@ class DropDownGenre extends React.Component{
     )
   }
 }
-
 const mapStateToProps = state => {
   return{
-    genres: state.genres
+    book: state.book
   }
 }
-
-export default connect(mapStateToProps)(DropDownGenre)
+export default connect(mapStateToProps)(GenreDropdown)

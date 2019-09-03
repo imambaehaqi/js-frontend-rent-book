@@ -1,36 +1,36 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Dropdown} from 'react-bootstrap'
-import {getBookPublish} from '../publics/actions/books'
 
-class DropDownPublish extends React.Component{
+import {getBookYears} from '../publics/actions/books';
+
+class YearDropdown extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      publishList: [],
-      history: props.history
+      history: props.history,
     }
   }
-  
-  goToYearPath = (year) => {
-    this.props.history.push(`/home/publish/${year}`)
+  goToYearPath = (year) =>{
+    this.state.history.push(`/home/year/${year}/`)
   }
 
-  componentDidMount = async () => {
-    await this.props.dispatch(getBookPublish())
-    this.setState ({publishList: this.props.books.publishList})
-  }
 
+  componentDidMount = () => {
+    if(this.props.book.yearsList.length === 0){
+      this.props.dispatch(getBookYears())
+    }
+  };
   render() {
-    const {publishList} = this.state
+    const {yearsList} = this.props.book
     return(
       <Dropdown>
         <Dropdown.Toggle variant="light" id="dropdown-basic">
-          All Time
+          <b>All Time</b>
         </Dropdown.Toggle>
         <Dropdown.Menu>
-          {publishList.length > 0 ? 
-            publishList.map((year, index) => {
+          {yearsList.length > 0 ? 
+            yearsList.map((year, index) => {
               return <Dropdown.Item key={year.year} onClick={()=>{this.goToYearPath(year.year)}}>{year.year}</Dropdown.Item>
             }):
             <Dropdown.Item key="0" href="#">Loading...</Dropdown.Item>}
@@ -39,10 +39,9 @@ class DropDownPublish extends React.Component{
     )
   }
 }
-
 const mapStateToProps = state => {
   return{
-    books: state.books
+    book: state.book
   }
 }
-export default connect(mapStateToProps)(DropDownPublish)
+export default connect(mapStateToProps)(YearDropdown)

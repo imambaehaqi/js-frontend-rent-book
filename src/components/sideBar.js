@@ -1,11 +1,15 @@
-import React, { Component } from 'react'
-import {Container, Row, Image} from 'react-bootstrap'
+import React,{Fragment} from 'react'
 import {Link} from 'react-router-dom'
+import {Container, Row, Button} from 'react-bootstrap'
+import '../App.css'
 import {connect} from 'react-redux'
-import {getProfile} from '../publics/actions/users'
-import ModalAddBook from './modalAddBook'
 
-class sideBar extends Component {
+import {getProfile, logout} from '../publics/actions/users'
+import ModalAddBook from './modalAddBook'
+import ModalAddBorrow from './modalAddBorrow'
+import ModalReturnBook from './modalReturnBook'
+
+class SidebarUser extends React.Component{
   constructor(props){
     super(props)
     this.state = {
@@ -14,58 +18,69 @@ class sideBar extends Component {
       email: props.email || "dummy@gmail.com",
       level: props.level || "regular",
       fullname: props.fullname || "dummyfullname",
-      userid: props.userid,
-      history: props.history
+      id: props.id ,
+      history: props.history,
     }
     this.handleLogout = this.handleLogout.bind(this)
   }
-
-  handleLogout = (event) => { 
+  handleLogout = async (event) => { 
     window.localStorage.removeItem("token")
+    await this.props.dispatch(logout())
     if(window.localStorage.getItem("token") === null)
       this.props.history.push('/')
   }
-
   componentDidMount = async() => {
-    await this.props.dispatch(getProfile())
-    this.setState({
-      ...this.props.users.usersProfile
-    })
+    if(!this.props.user.userProfile){
+      await this.props.dispatch(getProfile())
+      this.setState({
+        ...this.props.user.userProfile
+      })
+    }
   }
-
   render(){
-    return (
-      <div>
-          <Image className="dashboard" src={this.state.image}/><hr/>
-          <h5 style={{textAlign:'center'}}><h6>Card Number:</h6><b>CM-{this.state.userid}</b></h5>
-          <h4 style={{textAlign:'center'}}>{this.state.fullname}</h4><hr/>
-          <Container className="sidebar-buttons ">
-            <Row className="justify-content-md-left">
-                <Link to="/home/explore" className="btn" style={{width:'100%'}} variant="light">Explore</Link>
-            </Row>
-            <Row className="justify-content-md-left">
-                <Link to="/home/history" className="btn" style={{width:'100%'}} variant="light">History</Link>
-            </Row>
-              {
-                  this.state.level === "admin" ? 
-                  <Row className="justify-content-md-left">
-                    <ModalAddBook history={this.props.history}/>
-                  </Row>
-                  :''
-              }
-            <Row className="justify-content-md-left">
-                <Link style={{width:'100%'}} className="btn" variant="light" onClick={this.handleLogout} >Logout</Link>
-            </Row>
+    if(this.props.user.userProfile){
+      return (
+        <div>
+          <img src={this.props.user.userProfile.image||"https://icon-library.net/images/user-login-icon/user-login-icon-17.jpg"} alt="user"  className="User-picture"/>
+          <Container style={{textAlign:"left"}}>
+            <h6>ID Number : {this.props.user.userProfile.id}</h6>
+            <h6>Username : {this.props.user.userProfile.username}</h6>
+            <h6>Fullname : {this.props.user.userProfile.fullname}</h6>
           </Container>
-      </div>
-    )
-  }
+          <Container className="sidebar-buttons ">
+            <Row className="justify-content-md-center"><Link to="/home/explore" className="btn btn-light btn-lg" size="lg" variant="light">Explore</Link></Row>
+            <Row className="justify-content-md-center"><Link to="/home/history" className="btn btn-light btn-lg" size="lg" variant="light">History</Link></Row>
+            {
+              this.props.user.userProfile.level === "admin" ? 
+              <Fragment>
+                <Row className="justify-content-md-center">
+                  <ModalAddBook history={this.state.history}/>
+                </Row>
+                <Row className="justify-content-md-center">
+                  <ModalAddBorrow variant="light"/>
+                </Row>
+                <Row className="justify-content-md-center">
+                  <ModalReturnBook variant="light"/>
+                </Row>
+              </Fragment>
+              :''
+            }
+            <Row className="justify-content-md-center"><Button size="lg" variant="light" onClick={this.handleLogout} >Logout</Button></Row>
+          </Container>
+        </div>
+      )
+    }else{
+      return(
+        <h5>Loading....</h5>
+      )
+    }
+  }   
 }
 
 const mapStateToProps = (state) => {
   return{
-    users: state.users
+    user: state.user
   }
 }
 
-export default connect(mapStateToProps)(sideBar)
+export default connect(mapStateToProps)(SidebarUser)

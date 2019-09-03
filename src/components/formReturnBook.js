@@ -2,7 +2,7 @@ import React,{Fragment} from 'react';
 import {Row, Col, Form, Button, Modal} from 'react-bootstrap';
 import {connect} from 'react-redux';
 
-import {getLatestBorrowBook,returnBook} from '../publics/actions/borrows';
+import {getLatestBorrowingByBookId,returnBook} from '../publics/actions/borrows';
 import {setAvailability} from '../publics/actions/books';
 
 class ReturnBookForm extends React.Component{
@@ -41,7 +41,7 @@ class ReturnBookForm extends React.Component{
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    await this.props.dispatch(getLatestBorrowBook(this.state.formData.bookid))
+    await this.props.dispatch(getLatestBorrowingByBookId(this.state.formData.book_id))
       .catch((err) => {
         console.error(err)
       })
@@ -86,7 +86,7 @@ class ReturnBookForm extends React.Component{
           this.setState({
             showModal:true,
             modalTitle:"Failed",
-            modalMessage:this.props.borrowing.errMessage
+            modalMessage:this.props.borrows.errMessage
           })
         })
     }

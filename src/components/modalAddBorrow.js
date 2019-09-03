@@ -1,23 +1,24 @@
 import React, {Fragment} from 'react'
 import {Modal, Button} from 'react-bootstrap'
-import FormAddBorrow from './formAddBorrow';
+import AddBorrowingForm from './formAddBorrow';
 
-class ModalAddBorrow extends React.Component{
+class AddBorrowingModal extends React.Component{
   constructor(props){
     super(props)
     this.state = {
       showModal: false,
     }
   }
+  hide = ()=>{this.setState({showModal:false})}
   render(){
     return(
       <Fragment>
         <Button 
           className= {this.props.className}
-          variant={this.props.variant || "light"}
-          size = "lg"
+          variant={this.props.variant || "light"} 
+          size="lg"
           onClick={() => {this.setState({showModal:true})}}>
-          Borrow
+          Borrow Book
         </Button>
         <Modal
           show={this.state.showModal}
@@ -28,16 +29,18 @@ class ModalAddBorrow extends React.Component{
         >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
-              Form Borrow
+              Add Borrowing
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <FormAddBorrow bookId={this.props.bookid} closeModal={()=>{this.setState({showModal:false})}} history={this.props.history}/>
+            <AddBorrowingForm 
+              bookId={this.props.bookId} 
+              closeModal={this.hide} 
+              history={this.props.history}/>
           </Modal.Body>
         </Modal>
       </Fragment>
     )
   }
 }
-
-export default ModalAddBorrow
+export default AddBorrowingModal

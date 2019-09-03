@@ -1,22 +1,22 @@
-import React,{Fragment} from 'react'
-import {Row, Col, Form, Button, Modal} from 'react-bootstrap'
-import {connect} from 'react-redux'
+import React,{Fragment} from 'react';
+import {Row, Col, Form, Button, Modal} from 'react-bootstrap';
+import {connect} from 'react-redux';
 
-import {borrowBook, getHistoryBorrow} from '../publics/actions/borrows'
-import {setAvailability} from '../publics/actions/books'
+import {borrow, getBorrowingHistory} from '../publics/actions/borrows';
+import {setAvailability} from '../publics/actions/books';
 
-class FormAddBorrow extends React.Component{
+class AddBorrowingForm extends React.Component{
   constructor(props){
     super(props)
     this.state = {
       formData:{
-        userid: undefined,
-        bookid: props.bookid
+        user_id: undefined,
+        book_id: props.bookId
       },
       showModal:false,
       modalTitle:"",
       modalMessage:"",
-      history:props.history
+      history:props.history,
     }
   }
 
@@ -24,7 +24,7 @@ class FormAddBorrow extends React.Component{
     this.props.closeModal()
     this.setState({showModal: false})
     if(this.state.modalTitle !== "Failed")
-      this.props.dispatch(setAvailability(this.state.formData.bookid, 0))
+      this.props.dispatch(setAvailability(this.state.formData.book_id, 0))
   }
 
   handleChange = (event) => {
@@ -41,14 +41,14 @@ class FormAddBorrow extends React.Component{
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.dispatch(borrowBook(this.state.formData))
+    this.props.dispatch(borrow(this.state.formData))
       .then((res)=>{
         console.log(res)
         const borrowed_at = res.value.data.data.borrowed_at
         const borrowingDate = new Date(borrowed_at)
         let expirationDate = new Date()
         expirationDate.setTime(borrowingDate.getTime() + (1000*60*60*24*7))
-        this.props.dispatch(getHistoryBorrow())
+        this.props.dispatch(getBorrowingHistory())
         this.setState({
           showModal: true,
           modalTitle:"Success",
@@ -59,11 +59,10 @@ class FormAddBorrow extends React.Component{
         this.setState({
           showModal:true,
           modalTitle:"Failed",
-          modalMessage:this.props.borrows.errMessage
+          modalMessage:this.props.borrowing.errMessage
         })
       })
   }
-
   render(){
     return (
       <Fragment>
@@ -73,7 +72,7 @@ class FormAddBorrow extends React.Component{
               User ID
             </Form.Label>
             <Col sm="10">
-              <Form.Control onChange={this.handleChange} type="text" name="userid" placeholder="User ID..." />
+              <Form.Control onChange={this.handleChange} type="text" name="user_id" placeholder="User ID..." />
             </Col>
           </Form.Group>
 
@@ -82,7 +81,7 @@ class FormAddBorrow extends React.Component{
             Book ID
             </Form.Label>
             <Col sm="10">
-              <Form.Control onChange={this.handleChange} value={this.props.bookId} type="text" name="bookid" placeholder="Book ID..." />
+              <Form.Control onChange={this.handleChange} value={this.props.bookId} type="text" name="book_id" placeholder="Book ID..." />
             </Col>
           </Form.Group>
 
@@ -102,16 +101,14 @@ class FormAddBorrow extends React.Component{
           </Modal.Footer>
         </Modal>
       </Fragment>
-    )
+    );
   }
 }
-
 const mapStateToProps = state => {
   return{
-    books: state.books,
-    genres: state.genres,
-    borrows: state.borrows
+    book: state.book,
+    genre: state.genre,
+    borrowing: state.borrowing
   }
 }
-
-export default connect(mapStateToProps)(FormAddBorrow)
+export default connect(mapStateToProps)(AddBorrowingForm)

@@ -1,93 +1,108 @@
 import Axios from 'axios'
-
-const token = window.localStorage.getItem("token")
-
-export const getBooks = (dataSource, page = 1, sortby, search) => {
-    let url = `${dataSource}?page=${page}`
-    if(sortby !== null)
-        url += `&sortby = ${sortby}`
-    if(search !== null)
-        url += `&search = ${search}`
-
-    return {
-        type: 'GET_BOOKS',
-        payload: Axios.get(url, {
-            headers:{
-                Authorization: token
-            }
-        })
-    }
+export const getBooks = (dataSource = null, page = 1, sortby = null, search = null, availability = null) => {
+  let url = `${dataSource}/?page=${page}`
+  if(sortby !== null)
+    url += `&sortby=${sortby}`
+  if(search !== null )
+    url += `&search=${search}`
+  if(availability !== null )
+    url += `&availability=${availability}`
+  return {
+    type:'GET_BOOKS',
+    payload: Axios.get(url,{
+        headers:{
+          Authorization : window.localStorage.getItem("token")
+        }
+      }
+    )
+  }
 }
-
 export const getBookById = (id) => {
-    return {
-        type: 'GET_BOOK_BY_ID',
-        payload: Axios.get(`https://calm-beach-21365.herokuapp.com/books/${id}`,{
-            headers:{
-                Authorization: token
-            }
-        })
-    }
+  return {
+    type:'GET_BOOK_BY_ID',
+    payload: Axios.get(`http://localhost:1708/books/${id}`,{
+        headers:{
+          Authorization : window.localStorage.getItem("token")
+        }
+      }
+    )
+  }
 }
+
+export const getBookGenres = () => {
+  return {
+    type:'GET_BOOK_GENRES',
+    payload: Axios.get(`http://localhost:1708/books/genre`,{
+        headers:{
+          Authorization : window.localStorage.getItem("token")
+        }
+      }
+    )
+  }
+}
+
 
 export const addBook = (data) => {
-    return {
-        type: 'ADD_BOOK',
-        payload: Axios.post(`https://calm-beach-21365.herokuapp.com/books`, data, {
-            headers:{
-                Authorization: token
-            }
-        })
-    }
-}
-
-export const deleteBook = (id) => {
-    return {
-        type: 'DELETE_BOOK',
-        payload: Axios.delete(`https://calm-beach-21365.herokuapp.com/books/${id}`,{
-            headers:{
-                Authorization: token
-            }
-        })
-    }
-}
-
-export const editBook = (id, data) => {
-    return{
-        type: 'EDIT_BOOK',
-        payload: Axios.patch(`https://calm-beach-21365.herokuapp.com/books/${id}`, data, {
-            headers:{
-                Authorization: token
-            }
-        })
-    }
-}
-
-export const getBookPublish = () =>{
-    return{
-        type: 'GET_BOOKS_PUBLISH',
-        payload: Axios.get(`https://calm-beach-21365.herokuapp.com/books/publish`,{
-            headers:{
-                Authorization: token
-            }
-        })
-    }
-}
-
-export const getBookPopular = () => {
-    return{
-        type: 'GET_POPULAR_BOOKS',
-        payload: Axios.get(`https://calm-beach-21365.herokuapp.com/books/popular`,{
-            headers:{
-                Authorization: token 
-            }
-        })
-    }
-}
-
-export const setAvailability = (bookid,available) => {
-    return {
-      type:'SET_BOOK_AVAILABLE',
-      payload: {bookid,available}
-    }
+  return {
+    type:'ADD_BOOKS',
+    payload: Axios.post(`http://localhost:1708/books`, data, {
+        headers:{
+          Authorization : window.localStorage.getItem("token")
+        }
+      }
+    )
   }
+}
+export const deleteBook = (id) => {
+  return {
+    type:'DELETE_BOOKS',
+    payload: Axios.delete(`http://localhost:1708/books/${id}`,{
+        headers:{
+          Authorization : window.localStorage.getItem("token")
+        }
+      }
+    )
+  }
+}
+export const editBook = (id, data) => {
+  return {
+    type:'EDIT_BOOKS',
+    payload: Axios.patch(`http://localhost:1708/books/${id}`, data,{
+        headers:{
+          Authorization : window.localStorage.getItem("token")
+        }
+      }
+    )
+  }
+}
+
+export const getBookYears = () => {
+  return {
+    type:'GET_BOOK_YEARS',
+    payload: Axios.get(`http://localhost:1708/books/year/`,{
+        headers:{
+          Authorization : window.localStorage.getItem("token")
+        }
+      }
+    )
+  }
+}
+
+export const getNewestBooks = () => {
+  return {
+    type:'GET_NEWEST_BOOKS',
+    payload: Axios.get(`http://localhost:1708/books/newest`,{
+        headers:{
+          Authorization : window.localStorage.getItem("token")
+        }
+      }
+    )
+  }
+}
+
+export const setAvailability = (bookId,availability) => {
+  return {
+    type:'SET_BOOK_AVALIABILITY',
+    payload: {bookId,availability}
+  }
+}

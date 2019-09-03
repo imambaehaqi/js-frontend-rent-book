@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react'
 import {Modal, Button, Container, Row} from 'react-bootstrap'
 import {connect} from 'react-redux'
-import {deleteBook} from '../publics/actions/books'
+import {deleteBook} from '../publics/actions/books';
 
 class DeleteBookPrompt extends React.Component{
   constructor(props){
@@ -16,12 +16,12 @@ class DeleteBookPrompt extends React.Component{
   }
   
   handleDelete = async (event) => {
-    await this.props.dispatch(deleteBook(this.props.bookData.bookid))
+    await this.props.dispatch(deleteBook(this.props.bookData.id))
       .catch(() => {
         this.setState({
           showResponseModal:true,
           modalTitle:"Failed",
-          modalMessage:this.props.books.errMessage
+          modalMessage:this.props.book.errMessage
         })
       })
     this.setState({
@@ -41,6 +41,7 @@ class DeleteBookPrompt extends React.Component{
     return(
       <Fragment>
         <Button 
+          className= {this.props.className}
           variant={this.props.variant || "light"} 
           size="lg"
           onClick={() => {this.setState({showModal:true})}}>

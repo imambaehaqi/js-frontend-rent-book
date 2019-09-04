@@ -50,11 +50,13 @@
   text-shadow: 2px 2px black;
   font-size: 72px;
   padding-top: 260px;
+  text-align: left;
 }
 
 .text-margin h6{
   text-shadow: 2px 2px black;
   padding-top: 168px;
+  text-align: left;
 }
 
 .right-form{
@@ -288,6 +290,7 @@
   justify-content: center;
   flex-direction: column;
 }
+
 .deleteModalButtons{
   display: flex;
   justify-content: center;

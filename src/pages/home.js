@@ -16,7 +16,7 @@ import SortByDropdown from '../components/dropDownSort'
 import {SearchBook} from '../components/searchBooks'
 import {getProfile} from '../publics/actions/users'
 import AvailabilityDropdown from '../components/dropDownAvailable'
-import HistoryTable from '../components/historyBorrow'
+import HistoryBorrow from '../components/historyBorrow'
 
 class Home extends React.Component{
   constructor(props){
@@ -61,8 +61,6 @@ class Home extends React.Component{
           </Button>
           <GenreDropdown history={this.props.history}/>
           <YearDropdown history={this.props.history}/>
-          <SortByDropdown history={this.props.history}/>
-          <AvailabilityDropdown history={this.props.history} />
           <SearchBook history={this.props.history}/>
           <Navbar.Brand onClick={()=>{this.props.history.push("/home")}}>
             <img src={Bookshelf} alt="bookshelf" style={{width:'50px'}}/><b>Book's</b>
@@ -76,6 +74,8 @@ class Home extends React.Component{
             return(
               <div>
                 <PopularBooksCarousel history={history}/>
+                <SortByDropdown history={this.props.history}/>
+                <AvailabilityDropdown history={this.props.history} />
                 <BooksList 
                   availability={params.get("availability")}
                   history={history} 
@@ -106,13 +106,13 @@ class Home extends React.Component{
           }} 
         />
         <Route 
-          path="/home/history" 
+          path="/home/history"
           exact={true}
           render={({history}) => {
             if(this.props.user.userProfile.id !== undefined )
               return(
                 <div>
-                  <HistoryTable history={history} />
+                  <HistoryBorrow history={history} />
                 </div>
               );
             else 

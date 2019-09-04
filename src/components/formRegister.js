@@ -52,7 +52,7 @@ class formRegister extends Component {
         this.setState({
           showModal:true,
           modalTitle:"Failed Register",
-          modalMessage: this.props.users.errMessage
+          modalMessage: this.props.user.errMessage
         })
       })
   }
@@ -60,9 +60,9 @@ class formRegister extends Component {
   render () {
     return (
       <div className="container">
-        <h1>Register</h1>
+        <h1 className="text-left">Register</h1>
         <h6>Welcome Back, Please Register<br />to create account</h6>
-        <Form className='shadow col-lg-8' style={this.state.style} onSubmit={this.handleSubmit}>
+        <Form className='shadow col-lg-8 text-left' style={this.state.style} onSubmit={this.handleSubmit}>
           <Form.Group controlId='formBasicUsername'>
             <Form.Text className='text-muted'>Username:</Form.Text>
             <Form.Control name='username' type='text' onChange={this.handleChange} placeholder='Enter username' />
@@ -100,7 +100,7 @@ class formRegister extends Component {
 
 const mapStateToProps = state => {
   return{
-    users: state.users
+    user: state.user
   }
 }
 

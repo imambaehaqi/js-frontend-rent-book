@@ -46,13 +46,13 @@ class AddBorrowingForm extends React.Component{
         console.log(res)
         const borrowed_at = res.value.data.data.borrowed_at
         const borrowingDate = new Date(borrowed_at)
-        let expirationDate = new Date()
-        expirationDate.setTime(borrowingDate.getTime() + (1000*60*60*24*7))
+        let expiredDate = new Date()
+        expiredDate.setTime(borrowingDate.getTime() + (1000*60*60*24*7))
         this.props.dispatch(getBorrowingHistory())
         this.setState({
           showModal: true,
           modalTitle:"Success",
-          modalMessage:`Success Borrowing Book! Please return it before ${expirationDate.toDateString()}`,
+          modalMessage:`Success Borrowing Book! Please return it before ${expiredDate.toDateString()}`,
         })
       })
       .catch(() => {

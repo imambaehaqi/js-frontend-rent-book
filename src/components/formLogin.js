@@ -50,7 +50,7 @@ class formLogin extends React.Component {
       this.setState({
         showModal:true,
         modalTitle:"Failed",
-        modalMessage:this.props.users.errMessage
+        modalMessage:this.props.user.errMessage
       })
     })
   }
@@ -59,9 +59,9 @@ class formLogin extends React.Component {
     if(window.localStorage.getItem("token")) return <Redirect to="../"/>
     else return (
       <div className="container">
-        <h1>Login</h1>
+        <h1 className="text-left">Login</h1>
         <h6>Welcome Back, Please Login<br />to your account</h6>
-        <Form className='shadow col-lg-8' style={this.state.style} onSubmit={this.handleSubmit}>
+        <Form className='shadow col-lg-8 text-left' style={this.state.style} onSubmit={this.handleSubmit}>
           <Form.Group controlId='formBasicEmail'>
             <Form.Text className='text-muted'>
                           Email:
@@ -88,7 +88,7 @@ class formLogin extends React.Component {
 
 const mapStateToProps = state => {
   return{
-    users: state.users
+    user: state.user
   }
 }
 export default connect(mapStateToProps)(formLogin)

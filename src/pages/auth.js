@@ -43,8 +43,8 @@ class Auth extends Component {
               return (
                 this.state.loggedIn ? this.props.history.push('/')
                   : <div>
-                    <FormLogin />
-                  </div>
+                      <FormLogin />
+                    </div>
               )
             }}
           />
